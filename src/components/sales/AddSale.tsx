@@ -64,6 +64,12 @@ export default function AddSaleDialog({open, onClose}: Props) {
             return
         }
 
+        const {data: userData} = await supabase
+            .from('users')
+            .select('rank')
+            .eq('id', user.id)
+            .single()
+
         const {error: insertError} = await supabase.from('sales').insert({
             vehicle_name: form.vehicle_name,
             price: Number(form.price),
@@ -71,6 +77,7 @@ export default function AddSaleDialog({open, onClose}: Props) {
             buyer_name: form.buyer_name,
             user_id: user.id,
             sale_class: form.sale_class,
+            seller_rank: userData?.rank ?? 'Katseajaline',
         })
 
         if (insertError) {

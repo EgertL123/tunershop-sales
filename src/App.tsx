@@ -8,6 +8,7 @@ import Profile from './screens/Profile'
 import DashboardLayout from './layouts/DashboardLayout'
 import Stock from './screens/Stock'
 import SpecialOrders from './screens/SpecialOrders'
+import Statistics from './screens/Statistics'
 
 function ProtectedRoute({children}: { children: React.ReactNode }) {
     const [session, setSession] = useState<boolean | null>(null)
@@ -52,6 +53,7 @@ function App() {
                     }
                 >
                     <Route path="/dashboard" element={<Dashboard/>}/>
+                    <Route path="/statistics" element={<Statistics/>}/>
                     <Route path="/stock" element={<Stock/>}/>
                     <Route path="/special-orders" element={<SpecialOrders/>}/>
                     <Route path="/profile" element={<Profile/>}/>
