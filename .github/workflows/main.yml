@@ -33,7 +33,7 @@ jobs:
     
     environment:
       name: production
-      url: https://YOURDOMAIN.EU
+      url: https://tunershp.eu
     
     steps:
     - name: Checkout to main
