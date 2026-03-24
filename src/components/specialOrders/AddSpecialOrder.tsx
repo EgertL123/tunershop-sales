@@ -1,5 +1,5 @@
 import {useState} from 'react'
-import {X, CirclePlus, Save} from 'lucide-react'
+import {X, CirclePlus, Check} from 'lucide-react'
 import {supabase} from '../../supabaseClient.ts'
 
 type Props = {
@@ -131,9 +131,9 @@ export default function AddSpecialOrder({open, onClose}: Props) {
                     <div className="flex justify-end gap-3 pt-1">
                         <button
                             onClick={onClose}
-                            className="px-4 py-2 text-sm rounded-lg text-zinc-300 hover:text-white hover:bg-zinc-700 transition"
+                            className="cursor-pointer px-4 py-2 text-sm rounded-lg text-zinc-300 hover:text-white hover:bg-zinc-700 transition"
                         >
-                            <div className="flex items-center gap-1 cursor-pointer">
+                            <div className="flex items-center gap-1">
                                 <X className="w-4 h-4 text-red-400"/>
                                 Tühista
                             </div>
@@ -143,8 +143,8 @@ export default function AddSpecialOrder({open, onClose}: Props) {
                             disabled={loading}
                             className="px-4 py-2 text-sm font-semibold rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white transition disabled:opacity-50 cursor-pointer flex items-center gap-1"
                         >
-                            <Save className="w-4 h-4"/>
-                            {loading ? 'Salvestamine...' : 'Salvesta'}
+                            <Check className="w-4 h-4"/>
+                            {loading ? 'Salvestamine...' : 'Kinnita'}
                         </button>
                     </div>
                 </div>

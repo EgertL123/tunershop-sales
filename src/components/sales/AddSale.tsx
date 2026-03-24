@@ -1,5 +1,5 @@
 import {useState} from 'react'
-import {X, CirclePlus, Save} from 'lucide-react'
+import {X, CirclePlus, Check} from 'lucide-react'
 import {supabase} from '../../supabaseClient.ts'
 
 type Props = {
@@ -188,8 +188,8 @@ export default function AddSaleDialog({open, onClose}: Props) {
                             disabled={loading}
                             className="px-4 py-2 text-sm font-semibold rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white transition disabled:opacity-50 cursor-pointer flex items-center gap-1"
                         >
-                            <Save className="w-4 h-4"/>
-                            {loading ? 'Salvestamine...' : 'Salvesta'}
+                            <Check className="w-4 h-4"/>
+                            {loading ? 'Salvestamine...' : 'Kinnita'}
                         </button>
                     </div>
                 </div>

@@ -1,10 +1,28 @@
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import {NavLink, Link} from 'react-router-dom'
 import tunershopLogo from '../assets/images/tunershop-logo.svg'
 import {House, Warehouse, Banknote, TrendingUp, User, Gem, Menu, X} from 'lucide-react'
+import {supabase} from "../supabaseClient.ts";
 
 export default function Sidebar() {
     const [mobileOpen, setMobileOpen] = useState(false)
+    const [isPayrollAuthorized, setIsPayrollAuthorized] = useState(false)
+
+    useEffect(() => {
+        // Check if user has payroll access
+        const fetchUser = async () => {
+            const {data: {user}} = await supabase.auth.getUser()
+            if (user) {
+                const {data} = await supabase
+                    .from('users')
+                    .select('rank')
+                    .eq('id', user.id)
+                    .single()
+                setIsPayrollAuthorized(data?.rank === 'Raamatupidaja' || data?.rank === 'CEO')
+            }
+        }
+        fetchUser()
+    }, []);
 
     const linkClass = ({isActive}: { isActive: boolean }) =>
         `flex items-center rounded-lg px-4 py-2 transition ${
@@ -32,10 +50,12 @@ export default function Sidebar() {
                     <Gem className="text-indigo-300 mr-2"/>
                     Eritellimused
                 </NavLink>
-                <NavLink to="/salaries" className={linkClass} onClick={() => setMobileOpen(false)}>
-                    <Banknote className="text-indigo-300 mr-2"/>
-                    Palgad
-                </NavLink>
+                {isPayrollAuthorized && (
+                    <NavLink to="/salaries" className={linkClass} onClick={() => setMobileOpen(false)}>
+                        <Banknote className="text-indigo-300 mr-2"/>
+                        Palgad
+                    </NavLink>
+                )}
             </nav>
             <nav>
                 <NavLink to="/profile" className={linkClass} onClick={() => setMobileOpen(false)}>
@@ -67,9 +87,10 @@ export default function Sidebar() {
             )}
 
             {/* Mobile drawer */}
-            <div className={`fixed top-0 left-0 h-full w-64 bg-zinc-600 border-r border-zinc-500 p-4 flex flex-col z-50 transform transition-transform duration-300 md:hidden ${
-                mobileOpen ? 'translate-x-0' : '-translate-x-full'
-            }`}>
+            <div
+                className={`fixed top-0 left-0 h-full w-64 bg-zinc-600 border-r border-zinc-500 p-4 flex flex-col z-50 transform transition-transform duration-300 md:hidden ${
+                    mobileOpen ? 'translate-x-0' : '-translate-x-full'
+                }`}>
                 <div className="flex items-center justify-end mb-6">
                     <button
                         onClick={() => setMobileOpen(false)}
@@ -82,7 +103,8 @@ export default function Sidebar() {
             </div>
 
             {/* Desktop sidebar */}
-            <aside className="hidden md:flex w-64 min-h-screen bg-zinc-600 border-r border-zinc-500 p-4 flex-col sticky top-0">
+            <aside
+                className="hidden md:flex w-64 min-h-screen bg-zinc-600 border-r border-zinc-500 p-4 flex-col sticky top-0">
                 <Link to="/dashboard">
                     <img src={tunershopLogo} alt="Tunershop Logo" className="w-lg h-lg mx-auto mb-6"/>
                 </Link>
