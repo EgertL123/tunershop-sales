@@ -2,15 +2,15 @@ name: Build & Deploy to Zone
 on:
   push:
     branches:
-      - main
+      - master
 jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout to main
-        uses: actions/checkout@main
+      - name: Checkout to master
+        uses: actions/checkout@master
 
       - name: Set up Node
         uses: actions/setup-node@v3.8.1
@@ -36,8 +36,8 @@ jobs:
       url: https://tunershp.eu
     
     steps:
-    - name: Checkout to main
-      uses: actions/checkout@main
+    - name: Checkout to master
+      uses: actions/checkout@master
     
     - name: Download built files
       uses: actions/download-artifact@v2.1.1
