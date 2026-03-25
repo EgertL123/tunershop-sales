@@ -142,6 +142,7 @@ function Login() {
                 provider: 'discord',
                 options: {
                     scopes: 'identify email guilds',
+                    redirectTo: `${window.location.origin}/dashboard`,
                     queryParams: {prompt: 'consent'},
                 },
             })

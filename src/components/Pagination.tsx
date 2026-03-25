@@ -19,7 +19,7 @@ export default function Pagination({currentPage, totalPages, onPrevious, onNext}
                 Eelmine
             </button>
 
-            <span className="text-zinc-400 text-sm">
+            <span className="text-white text-sm">
                 Leht {currentPage} / {totalPages}
             </span>
 

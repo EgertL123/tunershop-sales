@@ -7,10 +7,9 @@ import {
     Activity,
     CircleDollarSign,
     Shield,
-    Banknote,
+    Check,
     MessageSquareWarning,
     Copy,
-    Check,
     CreditCard,
     TriangleAlert
 } from 'lucide-react'
@@ -66,7 +65,7 @@ export default function Salaries() {
                     .single()
 
                 const rank = data?.rank
-                setIsAccountant(rank === 'Raamatupidaja')
+                setIsAccountant(rank === 'Raamatupidaja' || rank === 'CEO')
                 setAuthorized(rank === 'Raamatupidaja' || rank === 'CEO')
             }
         }
@@ -202,19 +201,9 @@ export default function Salaries() {
         <div className="p-6 text-white space-y-6">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                 <h1 className="text-3xl font-bold">Palgad</h1>
-                {isAccountant && (
-                    <button
-                        onClick={() => setShowPayConfirm(true)}
-                        disabled={paying}
-                        className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-lg transition cursor-pointer disabled:opacity-50"
-                    >
-                        <Banknote className="w-5 h-5"/>
-                        Palgad on makstud
-                    </button>
-                )}
             </div>
 
-            <div className="flex items-center gap-2 text-sm text-zinc-400">
+            <div className="flex items-center gap-2 text-sm text-white font-bold">
                 <MessageSquareWarning className="w-6 h-6 text-red-400"/>
                 {periodStart
                     ? `Periood algab: ${new Date(periodStart).toLocaleString('et-EE')}`
@@ -222,96 +211,111 @@ export default function Salaries() {
             </div>
 
             {loading ? <LoadingSpinner/> : (
-                <div className="rounded-xl border border-zinc-700 overflow-hidden shadow-lg overflow-x-auto">
-                    <table className="w-full text-left min-w-150">
-                        <thead className="bg-zinc-900 border-b border-zinc-700">
-                        <tr>
-                            <th className="px-6 py-4 text-sm font-semibold text-zinc-300">
-                                <div className="flex items-center gap-2">
-                                    <User className="w-5 h-5 text-violet-300 shrink-0"/>
-                                    Müüja
-                                </div>
-                            </th>
-                            <th className="px-6 py-4 text-sm font-semibold text-zinc-300">
-                                <div className="flex items-center gap-2">
-                                    <Shield className="w-5 h-5 text-violet-300 shrink-0"/>
-                                    Ametikoht
-                                </div>
-                            </th>
-                            <th className="px-6 py-4 text-sm font-semibold text-zinc-300">
-                                <div className="flex items-center gap-2">
-                                    <Activity className="w-5 h-5 text-violet-300 shrink-0"/>
-                                    Müüke
-                                </div>
-                            </th>
-                            <th className="px-6 py-4 text-sm font-semibold text-zinc-300">
-                                <div className="flex items-center gap-2">
-                                    <CircleDollarSign className="w-5 h-5 text-indigo-300 shrink-0"/>
-                                    Palk
-                                </div>
-                            </th>
-                            <th className="px-6 py-4 text-sm font-semibold text-zinc-300">
-                                <div className="flex items-center gap-2">
-                                    <CreditCard className="w-5 h-5 text-indigo-300 shrink-0"/>
-                                    Kontonumber
-                                </div>
-                            </th>
-                        </tr>
-                        </thead>
-
-                        <tbody className="divide-y divide-zinc-700/50">
-                        {salaries.length === 0 ? (
+                <>
+                    <div className="rounded-xl border border-zinc-700 overflow-hidden shadow-lg overflow-x-auto">
+                        <table className="w-full text-left min-w-150">
+                            <thead className="bg-zinc-900 border-b border-zinc-700">
                             <tr>
-                                <td colSpan={5} className="px-6 py-8 text-center text-zinc-400 text-sm">
-                                    Müüke pole veel tehtud.
-                                </td>
+                                <th className="px-6 py-4 text-sm font-semibold text-zinc-300">
+                                    <div className="flex items-center gap-2">
+                                        <User className="w-5 h-5 text-violet-300 shrink-0"/>
+                                        Müüja
+                                    </div>
+                                </th>
+                                <th className="px-6 py-4 text-sm font-semibold text-zinc-300">
+                                    <div className="flex items-center gap-2">
+                                        <Shield className="w-5 h-5 text-violet-300 shrink-0"/>
+                                        Ametikoht
+                                    </div>
+                                </th>
+                                <th className="px-6 py-4 text-sm font-semibold text-zinc-300">
+                                    <div className="flex items-center gap-2">
+                                        <Activity className="w-5 h-5 text-violet-300 shrink-0"/>
+                                        Müüke
+                                    </div>
+                                </th>
+                                <th className="px-6 py-4 text-sm font-semibold text-zinc-300">
+                                    <div className="flex items-center gap-2">
+                                        <CircleDollarSign className="w-5 h-5 text-indigo-300 shrink-0"/>
+                                        Palk
+                                    </div>
+                                </th>
+                                <th className="px-6 py-4 text-sm font-semibold text-zinc-300">
+                                    <div className="flex items-center gap-2">
+                                        <CreditCard className="w-5 h-5 text-indigo-300 shrink-0"/>
+                                        Kontonumber
+                                    </div>
+                                </th>
                             </tr>
-                        ) : (
-                            salaries.map((worker) => (
-                                <tr
-                                    key={worker.user_id}
-                                    className="hover:bg-zinc-700 transition duration-150 bg-zinc-800"
-                                >
-                                    <td className="px-6 py-4 text-sm font-medium text-white">
-                                        {worker.display_name}
-                                    </td>
-                                    <td className="px-6 py-4 text-sm text-indigo-300">
-                                        {worker.rank ?? '-'}
-                                    </td>
-                                    <td className="px-6 py-4 text-sm text-zinc-300">
-                                        {worker.sale_count}
-                                    </td>
-                                    <td className="px-6 py-4 text-sm font-semibold text-emerald-400">
-                                        ${worker.total_final.toLocaleString()}
-                                    </td>
-                                    <td className="px-6 py-4 text-sm">
-                                        {worker.account_number ? (
-                                            <button
-                                                onClick={() => handleCopyAccount(worker)}
-                                                className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-zinc-700 hover:bg-zinc-600 text-zinc-200 text-xs transition cursor-pointer"
-                                            >
-                                                {copiedId === worker.user_id ? (
-                                                    <>
-                                                        <Check className="w-3 h-3 text-emerald-400"/>
-                                                        Kopeeritud
-                                                    </>
-                                                ) : (
-                                                    <>
-                                                        <Copy className="w-3 h-3"/>
-                                                        {worker.account_number}
-                                                    </>
-                                                )}
-                                            </button>
-                                        ) : (
-                                            <span className="text-zinc-500 text-xs">Puudub</span>
-                                        )}
+                            </thead>
+
+                            <tbody className="divide-y divide-zinc-700/50">
+                            {salaries.length === 0 ? (
+                                <tr>
+                                    <td colSpan={5} className="px-6 py-8 text-center text-zinc-400 text-sm">
+                                        Müüke pole veel tehtud.
                                     </td>
                                 </tr>
-                            ))
-                        )}
-                        </tbody>
-                    </table>
-                </div>
+                            ) : (
+                                salaries.map((worker) => (
+                                    <tr
+                                        key={worker.user_id}
+                                        className="hover:bg-zinc-700 transition duration-150 bg-zinc-800"
+                                    >
+                                        <td className="px-6 py-4 text-sm font-medium text-white">
+                                            {worker.display_name}
+                                        </td>
+                                        <td className="px-6 py-4 text-sm text-indigo-300">
+                                            {worker.rank ?? '-'}
+                                        </td>
+                                        <td className="px-6 py-4 text-sm text-zinc-300">
+                                            {worker.sale_count}
+                                        </td>
+                                        <td className="px-6 py-4 text-sm font-semibold text-emerald-400">
+                                            ${worker.total_final.toLocaleString()}
+                                        </td>
+                                        <td className="px-6 py-4 text-sm">
+                                            {worker.account_number ? (
+                                                <button
+                                                    onClick={() => handleCopyAccount(worker)}
+                                                    className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-zinc-700 hover:bg-zinc-600 text-zinc-200 text-xs transition cursor-pointer"
+                                                >
+                                                    {copiedId === worker.user_id ? (
+                                                        <>
+                                                            <Check className="w-3 h-3 text-emerald-400"/>
+                                                            Kopeeritud
+                                                        </>
+                                                    ) : (
+                                                        <>
+                                                            <Copy className="w-3 h-3"/>
+                                                            {worker.account_number}
+                                                        </>
+                                                    )}
+                                                </button>
+                                            ) : (
+                                                <span className="text-zinc-500 text-xs">Puudub</span>
+                                            )}
+                                        </td>
+                                    </tr>
+                                ))
+                            )}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    {isAccountant && (
+                        <div className="flex justify-start">
+                            <button
+                                onClick={() => setShowPayConfirm(true)}
+                                disabled={paying}
+                                className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-lg transition cursor-pointer disabled:opacity-50"
+                            >
+                                <Check className="w-5 h-5"/>
+                                Palgad on makstud
+                            </button>
+                        </div>
+                    )}
+                </>
             )}
 
             <PaySalariesConfirm
