@@ -15,10 +15,10 @@ function StockRow({stock}: StockRowProps) {
 
     return (
         <tr
-            className={`transition duration-150 ${
+            className={`transition duration-150 backdrop-blur-sm ${
                 isSoldOut
-                    ? 'bg-red-950 hover:bg-red-900/50 border-l-4 border-red-500'
-                    : 'hover:bg-zinc-700 bg-zinc-800'
+                    ? 'bg-red-950 hover:bg-red-900/50'
+                    : 'bg-zinc-800/60 hover:bg-zinc-800/50'
             }`}
         >
             <td className="px-2 py-2 md:px-6 md:py-4 text-sm text-zinc-200">{stock.vehicle_name}</td>

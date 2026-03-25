@@ -9,13 +9,13 @@ type StockSearchProps = {
 export default function StockSearch({searchTerm, onSearchChange, onClearSearch}: StockSearchProps) {
     return (
         <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-zinc-400"/>
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-zinc-400 z-10"/>
             <input
                 type="text"
                 placeholder="Otsi sõiduki nime järgi..."
                 value={searchTerm}
                 onChange={onSearchChange}
-                className="w-full pl-10 pr-10 py-2 bg-zinc-800 border border-zinc-700 rounded-lg text-white placeholder-zinc-500 focus:outline-none focus:border-violet-500 transition"
+                className="w-full pl-10 pr-10 py-2 bg-zinc-800/60 backdrop-blur-sm border border-zinc-700 rounded-lg text-white placeholder-zinc-400 focus:outline-none focus:border-violet-400 transition"
             />
             {searchTerm && (
                 <button

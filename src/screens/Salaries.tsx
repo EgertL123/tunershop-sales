@@ -60,13 +60,14 @@ export default function Salaries() {
                 setCurrentUserId(user.id)
                 const {data} = await supabase
                     .from('users')
-                    .select('rank')
+                    .select('rank, is_admin')
                     .eq('id', user.id)
                     .single()
 
                 const rank = data?.rank
+                const admin = data?.is_admin
                 setIsAccountant(rank === 'Raamatupidaja' || rank === 'CEO')
-                setAuthorized(rank === 'Raamatupidaja' || rank === 'CEO')
+                setAuthorized(rank === 'Raamatupidaja' || rank === 'CEO' || admin)
             }
         }
         fetchCurrentUser()
@@ -188,7 +189,7 @@ export default function Salaries() {
     if (!authorized) {
         return (
             <div className="min-h-[60vh] flex items-center justify-center p-6">
-                <div className="rounded-2xl border border-red-400/30 bg-red-500/10 p-6 text-center max-w-sm">
+                <div className="rounded-2xl border border-zinc-700/70 shadow-lg bg-zinc-800/60 backdrop-blur-sm p-6 text-center max-w-sm">
                     <TriangleAlert className="w-8 h-8 mx-auto mb-4 text-red-400"/>
                     <p className="text-white font-semibold text-lg mb-1">Ligipääs keelatud</p>
                     <p className="text-white text-sm">Sul ei ole õigust seda lehte vaadata.</p>
@@ -249,10 +250,10 @@ export default function Salaries() {
                             </tr>
                             </thead>
 
-                            <tbody className="divide-y divide-zinc-700/50">
+                            <tbody>
                             {salaries.length === 0 ? (
                                 <tr>
-                                    <td colSpan={5} className="px-6 py-8 text-center text-zinc-400 text-sm">
+                                    <td colSpan={5} className="px-6 py-8 text-cente r text-zinc-400 text-sm">
                                         Müüke pole veel tehtud.
                                     </td>
                                 </tr>
@@ -260,7 +261,7 @@ export default function Salaries() {
                                 salaries.map((worker) => (
                                     <tr
                                         key={worker.user_id}
-                                        className="hover:bg-zinc-700 transition duration-150 bg-zinc-800"
+                                        className="hover:bg-zinc-800/50 transition duration-150 bg-zinc-800/60"
                                     >
                                         <td className="px-6 py-4 text-sm font-medium text-white">
                                             {worker.display_name}

@@ -163,7 +163,7 @@ export default function Dashboard() {
                 <LoadingSpinner/>
             ) : (
                 <>
-                    <div className="rounded-xl border border-zinc-700 overflow-x-auto shadow-lg">
+                    <div className="rounded-xl border border-zinc-700 overflow-x-auto shadow-lg backdrop-blur-sm">
                         <table className="w-full text-left">
                             <thead className="bg-zinc-900 border-b border-zinc-700">
                             <tr>
@@ -214,7 +214,7 @@ export default function Dashboard() {
                             </tr>
                             </thead>
 
-                            <tbody className="divide-y divide-zinc-700/50">
+                            <tbody>
                             {currentItems.length === 0 ? (
                                 <tr>
                                     <td colSpan={isAdmin ? 7 : 6} className="px-6 py-8 text-center text-zinc-400 text-sm">
@@ -225,7 +225,7 @@ export default function Dashboard() {
                                 currentItems.map((sale) => (
                                     <tr
                                         key={sale.id}
-                                        className="hover:bg-zinc-700 transition duration-150 bg-zinc-800"
+                                        className="hover:bg-zinc-800/50 hover:backdrop-blur-sm transition duration-150 bg-zinc-800/60"
                                     >
                                         <td className="px-6 py-4 text-sm text-zinc-400">
                                             {new Date(sale.created_at).toLocaleString()}

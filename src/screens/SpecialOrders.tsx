@@ -161,7 +161,7 @@ export default function SpecialOrders() {
                 <LoadingSpinner/>
             ) : (
                 <>
-                    <div className="rounded-xl border border-zinc-700 overflow-x-auto shadow-lg">
+                    <div className="rounded-xl border border-zinc-700 overflow-x-auto shadow-lg backdrop-blur-sm">
                         <table className="w-full text-left">
                             <thead className="bg-zinc-900 border-b border-zinc-700">
                             <tr>
@@ -212,10 +212,10 @@ export default function SpecialOrders() {
                             </tr>
                             </thead>
 
-                            <tbody className="divide-y divide-zinc-700/50">
+                            <tbody>
                             {currentItems.length === 0 ? (
                                 <tr>
-                                    <td colSpan={isAdmin ? 7 : 6} className="px-6 py-8 text-center text-zinc-400 text-sm">
+                                    <td colSpan={isAdmin ? 7 : 6} className="px-6 py-8 text-center text-zinc-300 text-sm">
                                         Info puudub.
                                     </td>
                                 </tr>
@@ -223,7 +223,7 @@ export default function SpecialOrders() {
                                 currentItems.map((order) => (
                                     <tr
                                         key={order.id}
-                                        className="hover:bg-zinc-700 transition duration-150 bg-zinc-800"
+                                        className="hover:bg-zinc-800/50 hover:backdrop-blur-sm transition duration-150 bg-zinc-800/60"
                                     >
                                         <td className="px-6 py-4 text-sm text-zinc-400">
                                             {new Date(order.created_at).toLocaleString()}

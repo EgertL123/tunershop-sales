@@ -15,10 +15,14 @@ export default function Sidebar() {
             if (user) {
                 const {data} = await supabase
                     .from('users')
-                    .select('rank')
+                    .select('rank, is_admin')
                     .eq('id', user.id)
                     .single()
-                setIsPayrollAuthorized(data?.rank === 'Raamatupidaja' || data?.rank === 'CEO')
+                setIsPayrollAuthorized(
+                    data?.rank === 'Raamatupidaja' ||
+                    data?.rank === 'CEO' ||
+                    data?.is_admin === true
+                )
             }
         }
         fetchUser()

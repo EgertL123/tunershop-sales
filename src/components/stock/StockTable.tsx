@@ -16,7 +16,7 @@ type StockTableProps = {
 
 export default function StockTable({stocks, searchTerm}: StockTableProps) {
     return (
-        <div className="rounded-xl border border-zinc-700 overflow-x-auto shadow-lg">
+        <div className="rounded-xl border border-zinc-700 overflow-x-auto shadow-lg backdrop-blur-sm">
             <table className="w-full  text-left">
                 <thead className="bg-zinc-900 border-b border-zinc-700">
                 <tr>
@@ -47,7 +47,7 @@ export default function StockTable({stocks, searchTerm}: StockTableProps) {
                 </tr>
                 </thead>
 
-                <tbody className="bg-zinc-800">
+                <tbody>
                 {stocks.length === 0 ? (
                     <tr>
                         <td colSpan={4} className="px-6 py-8 text-center text-zinc-400 text-sm">

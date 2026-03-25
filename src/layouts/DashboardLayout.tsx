@@ -4,19 +4,20 @@ import backgroundImage from '../assets/images/background.png'
 
 export default function DashboardLayout() {
     return (
-        <div
-            className="min-h-screen flex flex-col md:flex-row"
-            style={{
-                backgroundImage: `url(${backgroundImage})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-            }}
-        >
-            <div className="absolute inset-0 bg-black/30 pointer-events-none md:hidden"></div>
+        <div className="min-h-screen flex flex-col md:flex-row">
             <Sidebar/>
 
-            <main className="relative z-10 flex-1 overflow-auto">
-                <Outlet/>
+            <main className="relative flex-1 overflow-auto"
+                  style={{
+                      backgroundImage: `url(${backgroundImage})`,
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center',
+                  }}
+            >
+                <div className="absolute inset-0  pointer-events-none"/>
+                <div className="relative z-10">
+                    <Outlet/>
+                </div>
             </main>
         </div>
     )
