@@ -76,7 +76,7 @@ export default function Statistics() {
 
     return (
         <div className="p-6 text-white space-y-6">
-            <h1 className="text-3xl font-bold">Statistika</h1>
+            <h1 className="text-3xl">Statistika</h1>
 
             {loading ? <LoadingSpinner/> : (
                 <div className="rounded-xl border border-zinc-700/70 bg-zinc-800/60 p-6 shadow-lg backdrop-blur-sm">

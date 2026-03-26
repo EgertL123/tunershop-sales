@@ -46,7 +46,6 @@ export default function Salaries() {
     const [salaries, setSalaries] = useState<WorkerSalary[]>([])
     const [loading, setLoading] = useState(true)
     const [paying, setPaying] = useState(false)
-    const [isAccountant, setIsAccountant] = useState(false)
     const [authorized, setAuthorized] = useState<boolean | null>(null)
     const [periodStart, setPeriodStart] = useState<string | null>(null)
     const [currentUserId, setCurrentUserId] = useState<string | null>(null)
@@ -66,7 +65,6 @@ export default function Salaries() {
 
                 const rank = data?.rank
                 const admin = data?.is_admin
-                setIsAccountant(rank === 'Raamatupidaja' || rank === 'CEO')
                 setAuthorized(rank === 'Raamatupidaja' || rank === 'CEO' || admin)
             }
         }
@@ -83,7 +81,7 @@ export default function Salaries() {
                 .limit(1)
                 .maybeSingle()
 
-            const from = lastPeriod?.paid_at ?? '2000-01-01T00:00:00Z'
+            const from = lastPeriod?.paid_at ?? '2025-01-01T00:00:00Z'
             const to = new Date().toISOString()
 
             setPeriodStart(lastPeriod?.paid_at ?? null)
@@ -201,7 +199,7 @@ export default function Salaries() {
     return (
         <div className="p-6 text-white space-y-6">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-                <h1 className="text-3xl font-bold">Palgad</h1>
+                <h1 className="text-3xl">Palgad</h1>
             </div>
 
             <div className="flex items-center gap-2 text-sm text-white font-bold">
@@ -226,7 +224,7 @@ export default function Salaries() {
                                 <th className="px-6 py-4 text-sm font-semibold text-zinc-300">
                                     <div className="flex items-center gap-2">
                                         <Shield className="w-5 h-5 text-violet-300 shrink-0"/>
-                                        Ametikoht
+                                        Auaste
                                     </div>
                                 </th>
                                 <th className="px-6 py-4 text-sm font-semibold text-zinc-300">
@@ -253,7 +251,7 @@ export default function Salaries() {
                             <tbody>
                             {salaries.length === 0 ? (
                                 <tr>
-                                    <td colSpan={5} className="px-6 py-8 text-cente r text-zinc-400 text-sm">
+                                    <td colSpan={5} className="px-6 py-8 text-center backdrop-blur-sm bg-zinc-800/60 text-zinc-300 text-sm">
                                         Müüke pole veel tehtud.
                                     </td>
                                 </tr>
@@ -304,7 +302,7 @@ export default function Salaries() {
                         </table>
                     </div>
 
-                    {isAccountant && (
+                    {authorized && (
                         <div className="flex justify-start">
                             <button
                                 onClick={() => setShowPayConfirm(true)}

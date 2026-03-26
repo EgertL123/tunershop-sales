@@ -1,3 +1,4 @@
+import {useEffect} from 'react'
 import {Check, MessageSquareWarning, X} from 'lucide-react'
 
 type PayConfirmationModalProps = {
@@ -8,6 +9,26 @@ type PayConfirmationModalProps = {
 }
 
 export default function PaySalariesConfirm({ isOpen, isLoading, onConfirm, onCancel }: PayConfirmationModalProps) {
+
+    // Handle keyboard events for enter and escape keys
+    useEffect(() => {
+        if (!isOpen) return;
+
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                if (!isLoading) onConfirm();
+            }
+            if (e.key === 'Escape') {
+                onCancel();
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [isOpen, isLoading, onConfirm, onCancel]);
+
     return (
         <>
             {/* Backdrop with fade animation */}

@@ -53,6 +53,11 @@ export default function EditSaleDialog({open, onClose, sale, onSave}: Props) {
         setForm((prev) => ({...prev, [e.target.name]: e.target.value}))
     }
 
+    const handleFormSubmit = (e: React.SyntheticEvent) => {
+        e.preventDefault()
+        handleSubmit()
+    }
+
     const handleSubmit = async () => {
         setError(null)
 
@@ -105,7 +110,8 @@ export default function EditSaleDialog({open, onClose, sale, onSave}: Props) {
                 onClick={onClose}
             >
                 {/* Modal with scale and slide animation */}
-                <div
+                <form
+                    onSubmit={handleFormSubmit}
                     className={`bg-zinc-900 border border-zinc-700 rounded-xl shadow-xl w-full max-w-md p-6 mx-4 space-y-5 transform transition-all duration-300 ${
                         open
                             ? 'opacity-100 scale-100 translate-y-0'
@@ -119,7 +125,7 @@ export default function EditSaleDialog({open, onClose, sale, onSave}: Props) {
                             <Edit2 className="w-6 h-6 text-blue-400"/>
                             Muuda müüki
                         </div>
-                        <button onClick={onClose} className="text-zinc-400 hover:text-white transition cursor-pointer">
+                        <button type="button" onClick={onClose} className="text-zinc-400 hover:text-white transition cursor-pointer">
                             <X className="w-5 h-5"/>
                         </button>
                     </div>
@@ -178,8 +184,9 @@ export default function EditSaleDialog({open, onClose, sale, onSave}: Props) {
 
                     <div className="flex justify-end gap-3 pt-1">
                         <button
+                            type="button"
                             onClick={onClose}
-                            className="px-4 py-2 text-sm rounded-lg text-zinc-300 hover:text-white hover:bg-zinc-700 transition"
+                            className="cursor-pointer px-4 py-2 text-sm rounded-lg text-zinc-300 hover:text-white hover:bg-zinc-700 transition"
                         >
                             <div className="flex items-center gap-1 cursor-pointer">
                                 <X className="w-4 h-4 text-red-400"/>
@@ -187,6 +194,7 @@ export default function EditSaleDialog({open, onClose, sale, onSave}: Props) {
                             </div>
                         </button>
                         <button
+                            type="submit"
                             onClick={handleSubmit}
                             disabled={loading}
                             className="px-4 py-2 text-sm font-semibold rounded-lg bg-blue-600 hover:bg-blue-700 text-white transition disabled:opacity-50 cursor-pointer flex items-center gap-1"
@@ -195,7 +203,7 @@ export default function EditSaleDialog({open, onClose, sale, onSave}: Props) {
                             {loading ? 'Salvestamine...' : 'Kinnita'}
                         </button>
                     </div>
-                </div>
+                </form>
             </div>
         </>
     )

@@ -32,6 +32,11 @@ export default function AddSaleDialog({open, onClose}: Props) {
         setForm((prev) => ({...prev, [e.target.name]: e.target.value}))
     }
 
+    const handleFormSubmit = (e: React.SyntheticEvent) => {
+        e.preventDefault()
+        handleSubmit()
+    }
+
     const handleSubmit = async () => {
         setError(null)
 
@@ -101,7 +106,8 @@ export default function AddSaleDialog({open, onClose}: Props) {
                 onClick={onClose}
             >
                 {/* Modal with scale and slide animation */}
-                <div
+                <form
+                    onSubmit={handleFormSubmit}
                     className={`bg-zinc-900 border border-zinc-700 rounded-xl shadow-xl w-full max-w-md mx-4 p-6 transform transition-all duration-300 max-h-[90vh] overflow-y-auto ${
                         open
                             ? 'opacity-100 scale-100 translate-y-0'
@@ -115,8 +121,7 @@ export default function AddSaleDialog({open, onClose}: Props) {
                             <CirclePlus className="w-6 h-6 text-emerald-400"/>
                             Lisa uus müük
                         </div>
-                        <button onClick={onClose} className="text-zinc-400 hover:text-white transition cursor-pointer">
-                            <X className="w-5 h-5"/>
+                        <button type="button" onClick={onClose} className="text-zinc-400 hover:text-white transition cursor-pointer">                            <X className="w-5 h-5"/>
                         </button>
                     </div>
 
@@ -175,8 +180,9 @@ export default function AddSaleDialog({open, onClose}: Props) {
 
                     <div className="flex justify-end gap-3 pt-1">
                         <button
+                            type="button"
                             onClick={onClose}
-                            className="px-4 py-2 text-sm rounded-lg text-zinc-300 hover:text-white hover:bg-zinc-700 transition"
+                            className="cursor-pointer px-4 py-2 text-sm rounded-lg text-zinc-300 hover:text-white hover:bg-zinc-700 transition"
                         >
                             <div className="flex items-center gap-1 cursor-pointer">
                                 <X className="w-4 h-4 text-red-400"/>
@@ -184,7 +190,7 @@ export default function AddSaleDialog({open, onClose}: Props) {
                             </div>
                         </button>
                         <button
-                            onClick={handleSubmit}
+                            type="submit"
                             disabled={loading}
                             className="px-4 py-2 text-sm font-semibold rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white transition disabled:opacity-50 cursor-pointer flex items-center gap-1"
                         >
@@ -192,7 +198,7 @@ export default function AddSaleDialog({open, onClose}: Props) {
                             {loading ? 'Salvestamine...' : 'Kinnita'}
                         </button>
                     </div>
-                </div>
+                </form>
             </div>
         </>
     )

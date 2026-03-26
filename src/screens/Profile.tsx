@@ -1,6 +1,6 @@
 import {useEffect, useMemo, useState} from 'react'
 import {supabase} from '../supabaseClient'
-import {User, Shield, Mail, BadgeCheck, BadgeAlert, Bot, CreditCard} from 'lucide-react'
+import {User, Shield, BadgeCheck, BadgeAlert, Bot, CreditCard} from 'lucide-react'
 import InfoCard from '../components/InfoCard'
 import LoadingSpinner from '../components/LoadingSpinner'
 
@@ -14,7 +14,6 @@ type UserProfile = {
 
 export default function Profile() {
     const [profile, setProfile] = useState<UserProfile | null>(null)
-    const [email, setEmail] = useState<string | null>(null)
     const [loading, setLoading] = useState(true)
     const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
@@ -34,8 +33,6 @@ export default function Profile() {
                     setErrorMessage('You are not logged in.')
                     return
                 }
-
-                setEmail(user.email ?? null)
 
                 const {data, error} = await supabase
                     .from('users')
@@ -115,7 +112,7 @@ export default function Profile() {
                     />
                     <InfoCard
                         icon={<Shield size={18}/>}
-                        label="Ametikoht"
+                        label="Auaste"
                         value={profile?.rank ?? '-'}
                     />
                     <InfoCard
@@ -127,11 +124,6 @@ export default function Profile() {
                         icon={<Bot size={18}/>}
                         label="Discord"
                         value={profile?.discord_username ?? '-'}
-                    />
-                    <InfoCard
-                        icon={<Mail size={18}/>}
-                        label="Email"
-                        value={email ?? '-'}
                     />
                 </section>
             </div>

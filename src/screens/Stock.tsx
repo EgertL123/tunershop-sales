@@ -105,7 +105,7 @@ export default function Stock() {
     return (
         <div className="p-6 text-white space-y-6">
             <div>
-                <h1 className="text-3xl font-bold">Sõidukite limiidid</h1>
+                <h1 className="text-3xl">Sõidukite limiidid</h1>
             </div>
 
             <StockSearch

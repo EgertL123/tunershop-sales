@@ -35,7 +35,7 @@ export default function StockTable({stocks, searchTerm}: StockTableProps) {
                     <th className="px-2 py-2 md:px-6 md:py-4 text-sm font-semibold text-zinc-300">
                         <div className="flex items-center gap-2">
                             <Radio className="w-5 h-5 text-violet-300 shrink-0"/>
-                            Praegune seis
+                            Müüdud
                         </div>
                     </th>
                     <th className="px-2 py-2 md:px-6 md:py-4 text-sm font-semibold text-zinc-300">

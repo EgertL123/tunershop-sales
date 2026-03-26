@@ -128,7 +128,7 @@ export default function SpecialOrders() {
     return (
         <div className="p-6 text-white space-y-6">
             <div>
-                <h1 className="text-3xl font-bold">Eritellimused</h1>
+                <h1 className="text-3xl">Eritellimused</h1>
             </div>
 
             <div>
@@ -215,7 +215,7 @@ export default function SpecialOrders() {
                             <tbody>
                             {currentItems.length === 0 ? (
                                 <tr>
-                                    <td colSpan={isAdmin ? 7 : 6} className="px-6 py-8 text-center text-zinc-300 text-sm">
+                                    <td colSpan={isAdmin ? 7 : 6} className="px-6 py-8 text-center bg-zinc-800/60 backdrop-blur-sm text-zinc-300 text-sm">
                                         Info puudub.
                                     </td>
                                 </tr>

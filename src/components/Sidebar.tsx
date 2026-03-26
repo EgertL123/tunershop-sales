@@ -39,31 +39,31 @@ export default function Sidebar() {
         <>
             <nav className="flex-1 space-y-2">
                 <NavLink to="/dashboard" className={linkClass} onClick={() => setMobileOpen(false)}>
-                    <House className="text-indigo-300 mr-2"/>
+                    <House className=" mr-2"/>
                     Avaleht
                 </NavLink>
                 <NavLink to="/statistics" className={linkClass} onClick={() => setMobileOpen(false)}>
-                    <TrendingUp className="text-indigo-300 mr-2"/>
+                    <TrendingUp className=" mr-2"/>
                     Statistika
                 </NavLink>
                 <NavLink to="/stock" className={linkClass} onClick={() => setMobileOpen(false)}>
-                    <Warehouse className="text-indigo-300 mr-2"/>
+                    <Warehouse className=" mr-2"/>
                     Limiidid
                 </NavLink>
                 <NavLink to="/special-orders" className={linkClass} onClick={() => setMobileOpen(false)}>
-                    <Gem className="text-indigo-300 mr-2"/>
+                    <Gem className=" mr-2"/>
                     Eritellimused
                 </NavLink>
                 {isPayrollAuthorized && (
                     <NavLink to="/salaries" className={linkClass} onClick={() => setMobileOpen(false)}>
-                        <Banknote className="text-indigo-300 mr-2"/>
+                        <Banknote className=" mr-2"/>
                         Palgad
                     </NavLink>
                 )}
             </nav>
             <nav>
                 <NavLink to="/profile" className={linkClass} onClick={() => setMobileOpen(false)}>
-                    <User className="text-indigo-300 mr-2"/>
+                    <User className=" mr-2"/>
                     Profiil
                 </NavLink>
             </nav>
@@ -73,7 +73,7 @@ export default function Sidebar() {
     return (
         <>
             {/* Mobile top bar */}
-            <div className="md:hidden flex items-center justify-between px-4 py-3 bg-transparent">
+            <div className="md:hidden flex items-center justify-between px-4 py-3 bg-zinc-600 backdrop-blur-sm">
                 <button
                     onClick={() => setMobileOpen(true)}
                     className="text-white cursor-pointer"
