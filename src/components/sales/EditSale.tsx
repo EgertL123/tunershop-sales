@@ -66,6 +66,11 @@ export default function EditSaleDialog({open, onClose, sale, onSave}: Props) {
             return
         }
 
+        if (!isNaN(Number(form.buyer_name))) {
+            setError('Ostja nimi ei saa olla number.')
+            return
+        }
+
         if (form.price.length > 7) {
             setError('Hind ei saa olla pikem kui 7 numbrit.')
             return
@@ -125,7 +130,8 @@ export default function EditSaleDialog({open, onClose, sale, onSave}: Props) {
                             <Edit2 className="w-6 h-6 text-blue-400"/>
                             Muuda müüki
                         </div>
-                        <button type="button" onClick={onClose} className="text-zinc-400 hover:text-white transition cursor-pointer">
+                        <button type="button" onClick={onClose}
+                                className="text-zinc-400 hover:text-white transition cursor-pointer">
                             <X className="w-5 h-5"/>
                         </button>
                     </div>

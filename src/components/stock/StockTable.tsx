@@ -50,7 +50,7 @@ export default function StockTable({stocks, searchTerm}: StockTableProps) {
                 <tbody>
                 {stocks.length === 0 ? (
                     <tr>
-                        <td colSpan={4} className="px-6 py-8 text-center text-zinc-400 text-sm">
+                        <td colSpan={4} className="px-6 py-8 text-center text-zinc-300 text-sm bg-zinc-800/60">
                             {searchTerm ? 'Otsingule vastavaid tulemusi ei leitud.' : 'Info puudub.'}
                         </td>
                     </tr>

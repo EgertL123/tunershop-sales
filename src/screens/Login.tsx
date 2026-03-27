@@ -3,6 +3,7 @@ import {useNavigate} from 'react-router-dom'
 import {supabase} from '../supabaseClient'
 import tunershopLogo from '../assets/images/tunershop-logo.svg'
 import {TriangleAlert} from 'lucide-react'
+import loginBackground from '../assets/images/login-background.png'
 
 const REQUIRED_GUILD_ID = '863795516743090207'
 
@@ -81,7 +82,7 @@ function Login() {
             const isMember = guilds.some((guild) => guild.id === REQUIRED_GUILD_ID)
 
             if (!isMember) {
-                setErrorMessage('Sisse logimiseks pead olema Tunershopi Discordis.')
+                setErrorMessage('Sisselogimiseks pead olema Tunershopi Discordis.')
                 await supabase.auth.signOut()
                 return
             }
@@ -96,20 +97,20 @@ function Login() {
 
             if (upsertError) {
                 console.error('Error creating/updating user row:', upsertError)
-                setErrorMessage('Could not create your user profile.')
+                setErrorMessage('Kasutaja profiili ei õnnestunud luua.')
                 return
             }
 
             const {data: profile} = await supabase
                 .from('users')
-                .select('display_name')
+                .select('display_name, account_number')
                 .eq('id', session.user.id)
                 .single()
 
-            navigate(profile?.display_name ? '/dashboard' : '/setup-profile')
+            navigate((profile?.display_name && profile?.account_number) ? '/dashboard' : '/setup-profile')
         } catch (error) {
             console.error('Error checking Discord guild membership:', error)
-            setErrorMessage('Could not verify your Discord server membership. Please try again.')
+            setErrorMessage('Ei õnnestunud kontrollida liikmelisust Tunershopi Discordis. Proovi uuesti.')
         } finally {
             inFlightRef.current = false
             setCheckingMembership(false)
@@ -152,18 +153,24 @@ function Login() {
             }
         } catch (error) {
             console.error('Error logging in with Discord:', error)
-            setErrorMessage('An error occurred during login. Please try again.')
+            setErrorMessage('Sisselogimisega tekkis probleem. Proovi uuesti.')
         }
     }
 
     return (
-        <div className="min-h-screen bg-indigo-950 flex flex-col items-center justify-center p-4">
+        <div className="min-h-screen  flex flex-col items-center justify-center p-4"
+             style={{
+                 backgroundImage: `url(${loginBackground})`,
+                 backgroundSize: 'cover',
+                 backgroundPosition: 'center',
+             }}>
             <div className="text-center max-w-xl">
                 <img src={tunershopLogo} alt="Tunershop Logo" className="w-lg h-lg mx-auto mb-6"/>
 
                 <div className="flex flex-col md:flex-row justify-center items-center text-gray-200 text-lg mb-4 gap-4">
                     <TriangleAlert className="text-orange-300 w-10 h-10 shrink-0"/>
-                    <p className="font-[Inter] font-bold text-center md:text-left">Autentimine on võimalik vaid läbi Discordi!</p>
+                    <p className="font-[Inter] font-bold text-center md:text-left">Autentimine on võimalik vaid läbi
+                        Discordi!</p>
                 </div>
 
                 {errorMessage && (

@@ -63,6 +63,11 @@ export default function EditSpecialOrder({open, onClose, order, onSave}: Props) 
             return
         }
 
+        if (!isNaN(Number(form.buyer_name))) {
+            setError('Ostja nimi ei saa olla number.')
+            return
+        }
+
         if (priceNum <= 0) {
             setError('Hind ei saa olla null või negatiivne.')
             return
@@ -121,14 +126,21 @@ export default function EditSpecialOrder({open, onClose, order, onSave}: Props) 
                             <Edit2 className="w-6 h-6 text-blue-400"/>
                             Muuda eritellimust
                         </div>
-                        <button type="button" onClick={onClose} className="text-zinc-400 hover:text-white transition cursor-pointer">
+                        <button type="button" onClick={onClose}
+                                className="text-zinc-400 hover:text-white transition cursor-pointer">
                             <X className="w-5 h-5"/>
                         </button>
                     </div>
 
                     {/* Fields */}
                     {[
-                        {label: 'Sõiduki nimi', name: 'vehicle_name', placeholder: 'Sõiduki nimi', type: 'text', maxLength: 70},
+                        {
+                            label: 'Sõiduki nimi',
+                            name: 'vehicle_name',
+                            placeholder: 'Sõiduki nimi',
+                            type: 'text',
+                            maxLength: 70
+                        },
                         {label: 'Hind', name: 'price', placeholder: 'Hind', type: 'number', maxLength: 8},
                         {label: 'Numbrimärk', name: 'plate', placeholder: 'Numbrimärk', type: 'text', maxLength: 8},
                         {label: 'Ostja', name: 'buyer_name', placeholder: 'Ostja', type: 'text', maxLength: 70},

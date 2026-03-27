@@ -5,28 +5,27 @@ import {supabase} from '../../supabaseClient.ts'
 type Props = {
     open: boolean
     onClose: () => void
+    onSave: () => void
 }
 
-type SpecialOrderForm = {
-    vehicle_name: string
-    price: string
-    plate: string
-    buyer_name: string
+type DiscountForm = {
+    name: string
+    company: string
 }
 
-const defaultForm: SpecialOrderForm = {
-    vehicle_name: '',
-    price: '',
-    plate: '',
-    buyer_name: '',
+const companies = ['Carstar', 'Jose Cafe']
+
+const defaultForm: DiscountForm = {
+    name: '',
+    company: '',
 }
 
-export default function AddSpecialOrder({open, onClose}: Props) {
-    const [form, setForm] = useState<SpecialOrderForm>(defaultForm)
+export default function AddDiscount({open, onClose, onSave}: Props) {
+    const [form, setForm] = useState<DiscountForm>(defaultForm)
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState<string | null>(null)
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         setForm((prev) => ({...prev, [e.target.name]: e.target.value}))
     }
 
@@ -38,43 +37,22 @@ export default function AddSpecialOrder({open, onClose}: Props) {
     const handleSubmit = async () => {
         setError(null)
 
-        const priceNum = Number(form.price)
-
-        if (!form.vehicle_name.trim() || !form.price || !form.plate.trim() || !form.buyer_name.trim()) {
-            setError('Kõik väljad peavad olema täidetud!')
+        if (!form.name.trim() || !isNaN(Number(form.name))) {
+            setError('Töötaja nimi peab olema täidetud!')
             return
         }
 
-        if (priceNum <= 0) {
-            setError('Hind ei saa olla null või negatiivne.')
-            return
-        }
-
-        if (!isNaN(Number(form.buyer_name))) {
-            setError('Ostja nimi ei saa olla number.')
-            return
-        }
-
-        if (form.price.length > 7) {
-            setError('Hind ei saa olla pikem kui 7 numbrit.')
+        if (!form.company) {
+            setError('Ettevõte peab olema valitud!')
             return
         }
 
         setLoading(true)
 
-        const {data: {user}} = await supabase.auth.getUser()
-        if (!user) {
-            setError('Kasutaja ei ole sisse logitud.')
-            setLoading(false)
-            return
-        }
-
-        const {error: insertError} = await supabase.from('special_orders').insert({
-            vehicle_name: form.vehicle_name,
-            price: Number(form.price),
-            plate: form.plate,
-            buyer_name: form.buyer_name,
-            user_id: user.id,
+        const {error: insertError} = await supabase.from('discount').insert({
+            name: form.name.trim(),
+            company: form.company,
+            discounts_used: 0
         })
 
         if (insertError) {
@@ -85,6 +63,7 @@ export default function AddSpecialOrder({open, onClose}: Props) {
 
         setForm(defaultForm)
         setLoading(false)
+        onSave()
         onClose()
     }
 
@@ -111,7 +90,7 @@ export default function AddSpecialOrder({open, onClose}: Props) {
                     <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
                             <CirclePlus className="w-6 h-6 text-emerald-400"/>
-                            Lisa eritellimus
+                            Lisa uus töötaja
                         </div>
                         <button type="button" onClick={onClose}
                                 className="text-zinc-400 hover:text-white transition cursor-pointer">
@@ -120,33 +99,37 @@ export default function AddSpecialOrder({open, onClose}: Props) {
                     </div>
 
                     {/* Fields */}
-                    {[
-                        {
-                            label: 'Sõiduki nimi',
-                            name: 'vehicle_name',
-                            placeholder: 'Sõiduki nimi',
-                            type: 'text',
-                            maxLength: 70
-                        },
-                        {label: 'Hind', name: 'price', placeholder: 'Hind', type: 'number', maxLength: 8},
-                        {label: 'Numbrimärk', name: 'plate', placeholder: 'Numbrimärk', type: 'text', maxLength: 8},
-                        {label: 'Ostja', name: 'buyer_name', placeholder: 'Ostja', type: 'text', maxLength: 70},
-                    ].map((field) => (
-                        <div key={field.name} className="flex flex-col gap-1">
-                            <label className="text-sm text-zinc-400">
-                                {field.label} <span className="text-red-400">*</span>
-                            </label>
-                            <input
-                                name={field.name}
-                                type={field.type}
-                                placeholder={field.placeholder}
-                                value={form[field.name as keyof SpecialOrderForm]}
-                                onChange={handleChange}
-                                maxLength={field.maxLength}
-                                className="bg-zinc-800 border border-zinc-700 text-white text-sm rounded-lg px-3 py-2 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-violet-500 transition"
-                            />
-                        </div>
-                    ))}
+                    <div className="flex flex-col gap-1">
+                        <label className="text-sm text-zinc-400">
+                            Töötaja nimi <span className="text-red-400">*</span>
+                        </label>
+                        <input
+                            name="name"
+                            type="text"
+                            placeholder="Töötaja nimi"
+                            value={form.name}
+                            onChange={handleChange}
+                            maxLength={70}
+                            className="bg-zinc-800 border border-zinc-700 text-white text-sm rounded-lg px-3 py-2 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-violet-500 transition"
+                        />
+                    </div>
+
+                    <div className="flex flex-col gap-1">
+                        <label className="text-sm text-zinc-400">
+                            Ettevõte <span className="text-red-400">*</span>
+                        </label>
+                        <select
+                            name="company"
+                            value={form.company}
+                            onChange={handleChange}
+                            className="bg-zinc-800 border border-zinc-700 text-white text-sm rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-violet-500 transition cursor-pointer"
+                        >
+                            <option value="" disabled>Vali ettevõte</option>
+                            {companies.map(company => (
+                                <option key={company} value={company}>{company}</option>
+                            ))}
+                        </select>
+                    </div>
 
                     {error && <p className="text-sm text-red-400">{error}</p>}
 
@@ -163,7 +146,6 @@ export default function AddSpecialOrder({open, onClose}: Props) {
                         </button>
                         <button
                             type="submit"
-                            onClick={handleSubmit}
                             disabled={loading}
                             className="px-4 py-2 text-sm font-semibold rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white transition disabled:opacity-50 cursor-pointer flex items-center gap-1"
                         >

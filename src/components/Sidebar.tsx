@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react'
 import {NavLink, Link} from 'react-router-dom'
 import tunershopLogo from '../assets/images/tunershop-logo.svg'
-import {House, Warehouse, Banknote, TrendingUp, User, Gem, Menu, X} from 'lucide-react'
+import {House, Warehouse, Banknote, TrendingUp, User, Gem, Menu, X, Handshake} from 'lucide-react'
 import {supabase} from "../supabaseClient.ts";
 
 export default function Sidebar() {
@@ -54,6 +54,10 @@ export default function Sidebar() {
                     <Gem className=" mr-2"/>
                     Eritellimused
                 </NavLink>
+                <NavLink to="/discounts" className={linkClass} onClick={() => setMobileOpen(false)}>
+                    <Handshake className=" mr-2"/>
+                    Koostööd
+                </NavLink>
                 {isPayrollAuthorized && (
                     <NavLink to="/salaries" className={linkClass} onClick={() => setMobileOpen(false)}>
                         <Banknote className=" mr-2"/>
@@ -73,7 +77,7 @@ export default function Sidebar() {
     return (
         <>
             {/* Mobile top bar */}
-            <div className="md:hidden flex items-center justify-between px-4 py-3 bg-zinc-600 backdrop-blur-sm">
+            <div className="md:hidden flex items-center justify-between px-4 py-3 bg-transparent">
                 <button
                     onClick={() => setMobileOpen(true)}
                     className="text-white cursor-pointer"
@@ -92,7 +96,7 @@ export default function Sidebar() {
 
             {/* Mobile drawer */}
             <div
-                className={`fixed top-0 left-0 h-full w-64 bg-zinc-600 border-r border-zinc-500 p-4 flex flex-col z-50 transform transition-transform duration-300 md:hidden ${
+                className={`fixed top-0 left-0 h-full w-64 bg-zinc-600/60 backdrop-blur-sm border-r border-zinc-500 p-4 flex flex-col z-50 transform transition-transform duration-300 md:hidden ${
                     mobileOpen ? 'translate-x-0' : '-translate-x-full'
                 }`}>
                 <div className="flex items-center justify-end mb-6">
@@ -108,7 +112,7 @@ export default function Sidebar() {
 
             {/* Desktop sidebar */}
             <aside
-                className="hidden md:flex w-64 min-h-screen bg-zinc-600 border-r border-zinc-500 p-4 flex-col sticky top-0">
+                className="hidden md:flex w-64 min-h-screen bg-zinc-600/60 backdrop-blur-sm border-r border-zinc-500 p-4 flex-col sticky top-0">
                 <Link to="/dashboard">
                     <img src={tunershopLogo} alt="Tunershop Logo" className="w-lg h-lg mx-auto mb-6"/>
                 </Link>
