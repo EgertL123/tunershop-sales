@@ -35,7 +35,7 @@ const RANK_MULTIPLIERS: Record<string, number> = {
 function getCommission(price: number): number {
     if (price < 250000) {
         return price * 0.10
-    } else if (price <= 1000000) {
+    } else if (price < 1000000) {
         return 25000
     } else {
         return 35000

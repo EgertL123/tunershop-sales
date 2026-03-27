@@ -92,21 +92,28 @@ export default function Dashboard() {
             .channel('sales-realtime')
             .on(
                 'postgres_changes',
-                {event: 'INSERT', schema: 'public', table: 'sales'},
+                {event: '*', schema: 'public', table: 'sales'},
                 async (payload) => {
-                    const newSale = payload.new as Sale
+                    if (payload.eventType === 'INSERT' || payload.eventType === 'UPDATE') {
+                        const sale = payload.new as Sale
+                        const {data: userData} = await supabase
+                            .from('users')
+                            .select('display_name')
+                            .eq('id', sale.user_id)
+                            .single()
 
-                    const {data: userData} = await supabase
-                        .from('users')
-                        .select('display_name')
-                        .eq('id', newSale.user_id)
-                        .single()
+                        const saleWithName = {...sale, display_name: userData?.display_name ?? 'Tundmatu'}
 
-                    setSales((prev) => [{
-                        ...newSale,
-                        display_name: userData?.display_name ?? 'Tundmatu',
-                    }, ...prev])
-                    resetPage()
+                        if (payload.eventType === 'INSERT') {
+                            setSales((prev) => [saleWithName, ...prev])
+                            resetPage()
+                        } else {
+                            setSales((prev) => prev.map((s) => s.id === sale.id ? saleWithName : s))
+                        }
+                    } else if (payload.eventType === 'DELETE') {
+                        setSales((prev) => prev.filter((s) => s.id !== (payload.old as Sale).id))
+                        resetPage()
+                    }
                 }
             )
             .subscribe()

@@ -91,21 +91,28 @@ export default function SpecialOrders() {
             .channel('special_orders-realtime')
             .on(
                 'postgres_changes',
-                {event: 'INSERT', schema: 'public', table: 'special_orders'},
+                {event: '*', schema: 'public', table: 'special_orders'},
                 async (payload) => {
-                    const newSpecialOrder = payload.new as SpecialOrder
+                    if (payload.eventType === 'INSERT' || payload.eventType === 'UPDATE') {
+                        const order = payload.new as SpecialOrder
+                        const {data: userData} = await supabase
+                            .from('users')
+                            .select('display_name')
+                            .eq('id', order.user_id)
+                            .single()
 
-                    const {data: userData} = await supabase
-                        .from('users')
-                        .select('display_name')
-                        .eq('id', newSpecialOrder.user_id)
-                        .single()
+                        const orderWithName = {...order, display_name: userData?.display_name ?? 'Tundmatu'}
 
-                    setSpecialOrders((prev) => [{
-                        ...newSpecialOrder,
-                        display_name: userData?.display_name ?? 'Tundmatu',
-                    }, ...prev])
-                    resetPage()
+                        if (payload.eventType === 'INSERT') {
+                            setSpecialOrders((prev) => [orderWithName, ...prev])
+                            resetPage()
+                        } else {
+                            setSpecialOrders((prev) => prev.map((o) => o.id === order.id ? orderWithName : o))
+                        }
+                    } else if (payload.eventType === 'DELETE') {
+                        setSpecialOrders((prev) => prev.filter((o) => o.id !== (payload.old as SpecialOrder).id))
+                        resetPage()
+                    }
                 }
             )
             .subscribe()
