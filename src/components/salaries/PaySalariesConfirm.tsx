@@ -8,7 +8,7 @@ type PayConfirmationModalProps = {
     onCancel: () => void
 }
 
-export default function PaySalariesConfirm({ isOpen, isLoading, onConfirm, onCancel }: PayConfirmationModalProps) {
+export default function PaySalariesConfirm({isOpen, isLoading, onConfirm, onCancel}: PayConfirmationModalProps) {
 
     // Handle keyboard events for enter and escape keys
     useEffect(() => {
@@ -76,7 +76,8 @@ export default function PaySalariesConfirm({ isOpen, isLoading, onConfirm, onCan
                         >
                             {isLoading ? (
                                 <>
-                                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"/>
+                                    <div
+                                        className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"/>
                                     Salvestamine...
                                 </>
                             ) : (

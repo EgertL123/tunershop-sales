@@ -39,7 +39,14 @@ export default function SpecialOrders() {
     const [loading, setLoading] = useState(true)
     const [isAdmin, setIsAdmin] = useState(false)
 
-    const {currentPage, totalPages, currentItems, handlePrevious, handleNext, resetPage} = usePagination(specialOrders, 10)
+    const {
+        currentPage,
+        totalPages,
+        currentItems,
+        handlePrevious,
+        handleNext,
+        resetPage
+    } = usePagination(specialOrders, 10)
 
     useEffect(() => {
         const fetchCurrentUser = async () => {
@@ -172,44 +179,44 @@ export default function SpecialOrders() {
                         <table className="w-full text-left">
                             <thead className="bg-zinc-900 border-b border-zinc-700">
                             <tr>
-                                <th className="px-6 py-4 text-sm font-semibold text-zinc-300">
+                                <th className="px-6 py-4 text-sm font-bold text-zinc-200">
                                     <div className="flex items-center gap-2">
                                         <CalendarFold className="w-5 h-5 text-violet-300 shrink-0"/>
-                                        Kuupäev
+                                        Kuupäev ja aeg
                                     </div>
                                 </th>
-                                <th className="px-6 py-4 text-sm font-semibold text-zinc-300">
+                                <th className="px-6 py-4 text-sm font-bold text-zinc-200">
                                     <div className="flex items-center gap-2">
                                         <CarFront className="w-5 h-5 text-violet-300 shrink-0"/>
                                         Sõiduk
                                     </div>
                                 </th>
-                                <th className="px-6 py-4 text-sm font-semibold text-zinc-300">
+                                <th className="px-6 py-4 text-sm font-bold text-zinc-200">
                                     <div className="flex items-center gap-2">
                                         <CircleDollarSign className="w-5 h-5 text-violet-300 shrink-0"/>
                                         Hind
                                     </div>
                                 </th>
-                                <th className="px-6 py-4 text-sm font-semibold text-zinc-300">
+                                <th className="px-6 py-4 text-sm font-bold text-zinc-200">
                                     <div className="flex items-center gap-2">
                                         <Hash className="w-5 h-5 text-violet-300 shrink-0"/>
                                         Numbrimärk
                                     </div>
                                 </th>
-                                <th className="px-6 py-4 text-sm font-semibold text-zinc-300">
+                                <th className="px-6 py-4 text-sm font-bold text-zinc-200">
                                     <div className="flex items-center gap-2">
                                         <ShoppingBasket className="w-5 h-5 text-violet-300 shrink-0"/>
                                         Ostja
                                     </div>
                                 </th>
-                                <th className="px-6 py-4 text-sm font-semibold text-zinc-300">
+                                <th className="px-6 py-4 text-sm font-bold text-zinc-200">
                                     <div className="flex items-center gap-2">
                                         <Store className="w-5 h-5 text-violet-300 shrink-0"/>
                                         Müüja
                                     </div>
                                 </th>
                                 {isAdmin && (
-                                    <th className="px-6 py-4 text-sm font-semibold text-zinc-300">
+                                    <th className="px-6 py-4 text-sm font-bold text-zinc-200">
                                         <div className="flex items-center gap-2">
                                             <Gavel className="w-5 h-5 text-violet-300 shrink-0"/>
                                             Admin
@@ -222,7 +229,8 @@ export default function SpecialOrders() {
                             <tbody>
                             {currentItems.length === 0 ? (
                                 <tr>
-                                    <td colSpan={isAdmin ? 7 : 6} className="px-6 py-8 text-center bg-zinc-800/60 backdrop-blur-sm text-zinc-300 text-sm">
+                                    <td colSpan={isAdmin ? 7 : 6}
+                                        className="px-6 py-8 text-center bg-zinc-800/60 backdrop-blur-sm text-zinc-300 text-sm">
                                         Info puudub.
                                     </td>
                                 </tr>

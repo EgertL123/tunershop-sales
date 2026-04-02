@@ -126,7 +126,7 @@ function Login() {
             }
 
             if (event === 'SIGNED_OUT') {
-                setErrorMessage(null)
+                inFlightRef.current = false
             }
         })
 
@@ -174,7 +174,7 @@ function Login() {
                 </div>
 
                 {errorMessage && (
-                    <div className="mb-4 rounded-lg bg-red-500/15 border border-red-500/30 p-4 text-red-200">
+                    <div className="mb-4 rounded-lg bg-red-500/40 border border-red-500 backdrop-blur-sm p-4 text-red-200">
                         <p>{errorMessage}</p>
                     </div>
                 )}

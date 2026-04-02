@@ -187,7 +187,8 @@ export default function Salaries() {
     if (!authorized) {
         return (
             <div className="min-h-[60vh] flex items-center justify-center p-6">
-                <div className="rounded-2xl border border-zinc-700/70 shadow-lg bg-zinc-800/60 backdrop-blur-sm p-6 text-center max-w-sm">
+                <div
+                    className="rounded-2xl border border-zinc-700/70 shadow-lg bg-zinc-800/60 backdrop-blur-sm p-6 text-center max-w-sm">
                     <TriangleAlert className="w-8 h-8 mx-auto mb-4 text-red-400"/>
                     <p className="text-white font-semibold text-lg mb-1">Ligipääs keelatud</p>
                     <p className="text-white text-sm">Sul ei ole õigust seda lehte vaadata.</p>
@@ -251,7 +252,8 @@ export default function Salaries() {
                             <tbody>
                             {salaries.length === 0 ? (
                                 <tr>
-                                    <td colSpan={5} className="px-6 py-8 text-center backdrop-blur-sm bg-zinc-800/60 text-zinc-300 text-sm">
+                                    <td colSpan={5}
+                                        className="px-6 py-8 text-center backdrop-blur-sm bg-zinc-800/60 text-zinc-300 text-sm">
                                         Müüke pole veel tehtud.
                                     </td>
                                 </tr>

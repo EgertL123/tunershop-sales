@@ -41,6 +41,7 @@ export default function Discounts() {
         setLoading(false)
     }
 
+    // Check user rank for additional permissions
     useEffect(() => {
         const fetchUserAndDiscounts = async () => {
             setLoading(true)
@@ -159,8 +160,8 @@ export default function Discounts() {
                 <h1 className="text-3xl">Koostööd</h1>
             </div>
 
-            <div className="flex items-center gap-2 text-sm text-white font-bold">
-                <Info className="w-6 h-6 text-indigo-300"/>
+            <div className="flex items-center gap-2 text-lg text-white font-bold">
+                <Info className="w-8 h-8 text-red-400"/>
                 Limiidid nullitakse iga kuu alguses automaatselt.
             </div>
 
@@ -209,26 +210,26 @@ export default function Discounts() {
                         <table className="w-full text-left">
                             <thead className="bg-zinc-900 border-b border-zinc-700">
                             <tr>
-                                <th className="px-6 py-3 text-sm font-semibold text-zinc-300">
+                                <th className="px-6 py-3 text-sm font-bold text-zinc-200">
                                     <div className="flex items-center gap-2">
                                         <User className="w-5 h-5 text-violet-300 shrink-0"/>
                                         Töötaja
                                     </div>
                                 </th>
-                                <th className="px-6 py-3 text-sm font-semibold text-zinc-300">
+                                <th className="px-6 py-3 text-sm font-bold text-zinc-200">
                                     <div className="flex items-center gap-2">
                                         <Building2 className="w-5 h-5 text-violet-300 shrink-0"/>
                                         Ettevõte
                                     </div>
                                 </th>
-                                <th className="px-6 py-3 text-sm font-semibold text-zinc-300">
+                                <th className="px-6 py-3 text-sm font-bold text-zinc-200">
                                     <div className="flex items-center justify-center gap-2">
                                         <SquareCheckBig className="w-5 h-5 text-violet-300 shrink-0"/>
                                         Kasutatud
                                     </div>
                                 </th>
                                 {canManage && (
-                                    <th className="px-6 py-3 text-sm font-semibold text-zinc-300">
+                                    <th className="px-6 py-3 text-sm font-bold text-zinc-200">
                                         <div className="flex items-center justify-center gap-2">
                                             <Gavel className="w-5 h-5 text-violet-300 shrink-0"/>
                                             Admin
