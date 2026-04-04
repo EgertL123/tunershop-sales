@@ -216,31 +216,31 @@ export default function Salaries() {
                         <table className="w-full text-left min-w-150">
                             <thead className="bg-zinc-900 border-b border-zinc-700">
                             <tr>
-                                <th className="px-6 py-4 text-sm font-semibold text-zinc-300">
+                                <th className="px-6 py-4 text-sm font-bold text-zinc-200">
                                     <div className="flex items-center gap-2">
                                         <User className="w-5 h-5 text-violet-300 shrink-0"/>
                                         Müüja
                                     </div>
                                 </th>
-                                <th className="px-6 py-4 text-sm font-semibold text-zinc-300">
+                                <th className="px-6 py-4 text-sm font-bold text-zinc-200">
                                     <div className="flex items-center gap-2">
                                         <Shield className="w-5 h-5 text-violet-300 shrink-0"/>
                                         Auaste
                                     </div>
                                 </th>
-                                <th className="px-6 py-4 text-sm font-semibold text-zinc-300">
+                                <th className="px-6 py-4 text-sm font-bold text-zinc-200">
                                     <div className="flex items-center gap-2">
                                         <Activity className="w-5 h-5 text-violet-300 shrink-0"/>
                                         Müüke
                                     </div>
                                 </th>
-                                <th className="px-6 py-4 text-sm font-semibold text-zinc-300">
+                                <th className="px-6 py-4 text-sm font-bold text-zinc-200">
                                     <div className="flex items-center gap-2">
                                         <CircleDollarSign className="w-5 h-5 text-indigo-300 shrink-0"/>
                                         Palk
                                     </div>
                                 </th>
-                                <th className="px-6 py-4 text-sm font-semibold text-zinc-300">
+                                <th className="px-6 py-4 text-sm font-bold text-zinc-200">
                                     <div className="flex items-center gap-2">
                                         <CreditCard className="w-5 h-5 text-indigo-300 shrink-0"/>
                                         Kontonumber
