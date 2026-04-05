@@ -226,7 +226,7 @@ export default function Dashboard() {
                             {currentItems.length === 0 ? (
                                 <tr>
                                     <td colSpan={isAdmin ? 7 : 6}
-                                        className="px-6 py-8 text-center text-zinc-400 text-sm">
+                                        className="px-6 py-8 text-center bg-zinc-800/60 backdrop-blur-s text-zinc-300 text-sm">
                                         Info puudub.
                                     </td>
                                 </tr>
