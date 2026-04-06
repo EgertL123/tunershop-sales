@@ -134,13 +134,7 @@ export default function AddSaleDialog({open, onClose}: Props) {
 
                     {/* Fields */}
                     {[
-                        {
-                            label: 'Sõiduki nimi',
-                            name: 'vehicle_name',
-                            placeholder: 'Sõiduki nimi',
-                            type: 'text',
-                            maxLength: 70
-                        },
+                        {label: 'Sõiduki nimi', name: 'vehicle_name', placeholder: 'Sõiduki nimi', type: 'text', maxLength: 70},
                         {label: 'Hind', name: 'price', placeholder: 'Hind', type: 'number', maxLength: 8},
                         {label: 'Numbrimärk', name: 'plate', placeholder: 'Numbrimärk', type: 'text', maxLength: 8},
                         {label: 'Ostja', name: 'buyer_name', placeholder: 'Ostja', type: 'text', maxLength: 70},
@@ -171,12 +165,12 @@ export default function AddSaleDialog({open, onClose}: Props) {
                                         className="bg-zinc-800 border border-zinc-700 text-white text-sm rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-violet-500 transition cursor-pointer"
                                     >
                                         <option value="" disabled>Vali klass</option>
-                                        <option value="X">X</option>
                                         <option value="S">S</option>
                                         <option value="A">A</option>
                                         <option value="B">B</option>
                                         <option value="C">C</option>
                                         <option value="D">D</option>
+                                        <option value="Väljamüüdud">Väljamüüdud</option>
                                     </select>
                                 </div>
                             )}
