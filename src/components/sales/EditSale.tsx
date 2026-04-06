@@ -174,12 +174,12 @@ export default function EditSaleDialog({open, onClose, sale, onSave}: Props) {
                                         className="bg-zinc-800 border border-zinc-700 text-white text-sm rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-violet-500 transition cursor-pointer"
                                     >
                                         <option value="" disabled>Vali klass</option>
-                                        <option value="X">X</option>
                                         <option value="S">S</option>
                                         <option value="A">A</option>
                                         <option value="B">B</option>
                                         <option value="C">C</option>
                                         <option value="D">D</option>
+                                        <option value="Väljamüüdud">Väljamüüdud</option>
                                     </select>
                                 </div>
                             )}
