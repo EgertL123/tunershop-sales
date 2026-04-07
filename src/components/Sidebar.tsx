@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react'
 import {NavLink, Link} from 'react-router-dom'
 import tunershopLogo from '../assets/images/tunershop-logo.svg'
-import {House, Warehouse, Banknote, TrendingUp, User, Gem, Menu, X, Handshake} from 'lucide-react'
+import {House, Warehouse, Banknote, TrendingUp, User, Gem, Menu, X, Handshake, ClipboardList} from 'lucide-react'
 import {supabase} from "../supabaseClient.ts";
 
 export default function Sidebar() {
@@ -57,6 +57,10 @@ export default function Sidebar() {
                 <NavLink to="/discounts" className={linkClass} onClick={() => setMobileOpen(false)}>
                     <Handshake className=" mr-2"/>
                     Koostööd
+                </NavLink>
+                <NavLink to="/vehicles" className={linkClass} onClick={() => setMobileOpen(false)}>
+                    <ClipboardList className=" mr-2"/>
+                    Tavasõidukid
                 </NavLink>
                 {isPayrollAuthorized && (
                     <NavLink to="/salaries" className={linkClass} onClick={() => setMobileOpen(false)}>
