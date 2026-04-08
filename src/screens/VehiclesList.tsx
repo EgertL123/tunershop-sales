@@ -88,7 +88,7 @@ export default function VehiclesList() {
     return (
         <div className="p-6 text-white space-y-6">
             <div>
-                <h1 className="text-3xl">Tavasõidukid</h1>
+                <h1 className="text-3xl">Kataloog</h1>
             </div>
 
             {loading ? (

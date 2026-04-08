@@ -60,7 +60,7 @@ export default function Sidebar() {
                 </NavLink>
                 <NavLink to="/vehicles" className={linkClass} onClick={() => setMobileOpen(false)}>
                     <ClipboardList className=" mr-2"/>
-                    Tavasõidukid
+                    Kataloog
                 </NavLink>
                 {isPayrollAuthorized && (
                     <NavLink to="/salaries" className={linkClass} onClick={() => setMobileOpen(false)}>
