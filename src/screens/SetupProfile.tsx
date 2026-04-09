@@ -2,7 +2,7 @@ import {useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 import {supabase} from '../supabaseClient'
 import tunershopLogo from '../assets/images/tunershop-logo.svg'
-import loginBackground from '../assets/images/login-background.png'
+import loginBackground from '../assets/images/login-background.webp'
 
 function SetupProfile() {
     const [displayName, setDisplayName] = useState('')

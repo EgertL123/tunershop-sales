@@ -3,7 +3,7 @@ import {useNavigate} from 'react-router-dom'
 import {supabase} from '../supabaseClient'
 import tunershopLogo from '../assets/images/tunershop-logo.svg'
 import {TriangleAlert} from 'lucide-react'
-import loginBackground from '../assets/images/login-background.png'
+import loginBackground from '../assets/images/login-background.webp'
 
 const REQUIRED_GUILD_ID = '863795516743090207'
 

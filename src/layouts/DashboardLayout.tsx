@@ -1,6 +1,6 @@
 import {Outlet} from 'react-router-dom'
 import Sidebar from '../components/Sidebar'
-import backgroundImage from '../assets/images/background.png'
+import backgroundImage from '../assets/images/background.webp'
 
 export default function DashboardLayout() {
     return (
