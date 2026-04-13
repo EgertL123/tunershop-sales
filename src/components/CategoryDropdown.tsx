@@ -23,11 +23,13 @@ function CategoryDropdown({ selectedCategory, categories, onCategoryChange }: Ca
 
     useEffect(() => {
         const handler = (e: MouseEvent) => {
-            if (ref.current && !ref.current.contains(e.target as Node)) closeDropdown();
+            if (ref.current && !ref.current.contains(e.target as Node) && open){
+                closeDropdown();
+            }
         };
         document.addEventListener("mousedown", handler);
         return () => document.removeEventListener("mousedown", handler);
-    }, []);
+    }, [open, closing]);
 
     const displayLabel = selectedCategory === "all" ? "Kõik kategooriad" : selectedCategory;
 
