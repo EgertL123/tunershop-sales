@@ -34,7 +34,7 @@ function CategoryDropdown({ selectedCategory, categories, onCategoryChange }: Ca
     const displayLabel = selectedCategory === "all" ? "Kõik kategooriad" : selectedCategory;
 
     return (
-        <div className="relative" ref={ref}>
+        <div className="relative w-fit" ref={ref}>
             <button
                 onClick={() => open ? closeDropdown() : setOpen(true)}
                 className="flex items-center gap-2 pl-4 pr-10 py-2 bg-zinc-800/60 backdrop-blur-sm border border-zinc-700 rounded-lg text-white focus:outline-none focus:border-violet-400 transition cursor-pointer relative"
