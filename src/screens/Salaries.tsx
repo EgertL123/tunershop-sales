@@ -8,7 +8,7 @@ import {
     CircleDollarSign,
     Shield,
     Check,
-    MessageSquareWarning,
+    Info,
     Copy,
     CreditCard,
     TriangleAlert
@@ -203,10 +203,10 @@ export default function Salaries() {
                 <h1 className="text-3xl">Palgad</h1>
             </div>
 
-            <div className="flex items-center gap-2 text-sm text-white font-bold">
-                <MessageSquareWarning className="w-6 h-6 text-red-400"/>
+            <div className="flex items-center gap-2 text-md text-white font-bold">
+                <Info className="w-8 h-8 text-violet-300"/>
                 {periodStart
-                    ? `Periood algab: ${new Date(periodStart).toLocaleString('et-EE')}`
+                    ? `Periood algas: ${new Date(periodStart).toLocaleString('et-EE')}`
                     : 'Vajuta palkade maksmise nupule alles siis, kui palgad on makstud!'}
             </div>
 
@@ -236,13 +236,13 @@ export default function Salaries() {
                                 </th>
                                 <th className="px-6 py-4 text-sm font-bold text-zinc-200">
                                     <div className="flex items-center gap-2">
-                                        <CircleDollarSign className="w-5 h-5 text-indigo-300 shrink-0"/>
+                                        <CircleDollarSign className="w-5 h-5 text-violet-300 shrink-0"/>
                                         Palk
                                     </div>
                                 </th>
                                 <th className="px-6 py-4 text-sm font-bold text-zinc-200">
                                     <div className="flex items-center gap-2">
-                                        <CreditCard className="w-5 h-5 text-indigo-300 shrink-0"/>
+                                        <CreditCard className="w-5 h-5 text-violet-300 shrink-0"/>
                                         Kontonumber
                                     </div>
                                 </th>
@@ -266,8 +266,8 @@ export default function Salaries() {
                                         <td className="px-6 py-4 text-sm font-medium text-white">
                                             {worker.display_name}
                                         </td>
-                                        <td className="px-6 py-4 text-sm text-indigo-300">
-                                            {worker.rank ?? '-'}
+                                        <td className="px-6 py-4 text-sm text-violet-300">
+                                            {worker.rank ?? 'Katseajaline'}
                                         </td>
                                         <td className="px-6 py-4 text-sm text-zinc-300">
                                             {worker.sale_count}

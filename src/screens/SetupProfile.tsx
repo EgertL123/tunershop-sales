@@ -93,7 +93,7 @@ function SetupProfile() {
                         w-full px-5 py-3 mb-4
                         bg-zinc-800/60 border backdrop-blur-sm border-white/20 rounded-full
                         text-white placeholder-zinc-300 text-lg
-                        focus:outline-none focus:border-indigo-400
+                        focus:outline-none focus:border-violet-400
                         transition-colors duration-200
                     "
                 />
@@ -111,7 +111,7 @@ function SetupProfile() {
                         w-full px-5 py-3 mb-4
                         bg-zinc-800/60 backdrop-blur-sm border border-white/20 rounded-full
                         text-white placeholder-zinc-300 text-lg
-                        focus:outline-none focus:border-indigo-400
+                        focus:outline-none focus:border-violet-400
                         transition-colors duration-200
                     "
                 />
@@ -121,7 +121,7 @@ function SetupProfile() {
                     disabled={loading}
                     className="
                         px-16 py-4 cursor-pointer
-                        bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed
+                        bg-violet-600 hover:bg-violet-500 disabled:opacity-50 disabled:cursor-not-allowed
                         text-white font-bold text-lg
                         rounded-full shadow-lg
                         transition-all duration-200 ease-in-out transform hover:-translate-y-0.5

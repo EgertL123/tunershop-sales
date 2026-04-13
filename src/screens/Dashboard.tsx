@@ -243,7 +243,7 @@ export default function Dashboard() {
                                         <td className="px-6 py-4 text-sm font-semibold text-emerald-400">
                                             ${sale.price.toLocaleString()}
                                         </td>
-                                        <td className="px-6 py-4 text-sm font-mono text-indigo-300 uppercase">{sale.plate}</td>
+                                        <td className="px-6 py-4 text-sm font-mono text-violet-300 uppercase">{sale.plate}</td>
                                         <td className="px-6 py-4 text-sm text-zinc-200">{sale.buyer_name}</td>
                                         <td className="px-6 py-4 text-sm font-medium text-white">{sale.display_name}</td>
                                         {isAdmin && (

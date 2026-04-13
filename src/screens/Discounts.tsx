@@ -1,10 +1,23 @@
 import {useEffect, useState} from 'react'
 import {supabase} from '../supabaseClient'
 import LoadingSpinner from '../components/LoadingSpinner.tsx'
-import {CirclePlus, Trash2, Gavel, Wrench, Coffee, Building2, User, Info, SquareCheckBig, Search, X} from 'lucide-react'
+import {
+    CirclePlus,
+    Trash2,
+    Gavel,
+    Wrench,
+    Coffee,
+    Building2,
+    User,
+    Info,
+    SquareCheckBig,
+    Search,
+    X,
+} from 'lucide-react'
 import AddDiscount from '../components/discounts/AddDiscount.tsx'
 import DeleteDiscount from '../components/discounts/DeleteDiscount.tsx'
 import Pagination from '../components/Pagination.tsx'
+import Checkbox from '../components/Checkbox'
 
 export type DiscountCustomer = {
     id: string
@@ -128,11 +141,11 @@ export default function Discounts() {
     const getCompanyIcon = (companyName: string) => {
         switch (companyName) {
             case 'Carstar':
-                return <Wrench className="w-5 h-5 text-indigo-300"/>
+                return <Wrench className="w-5 h-5 text-violet-300"/>
             case 'Jose Cafe':
-                return <Coffee className="w-5 h-5 text-indigo-300"/>
+                return <Coffee className="w-5 h-5 text-violet-300"/>
             default:
-                return <Building2 className="w-5 h-5 text-indigo-300"/>
+                return <Building2 className="w-5 h-5 text-violet-300"/>
         }
     }
 
@@ -261,17 +274,13 @@ export default function Discounts() {
                                         </td>
                                         <td className="px-6 py-4">
                                             <div className="flex items-center justify-center gap-4">
-                                                <input
-                                                    type="checkbox"
+                                                <Checkbox
                                                     checked={customer.discounts_used >= 1}
-                                                    onChange={(e) => updateDiscountCount(customer.id, e.target.checked ? 1 : 0)}
-                                                    className="w-5 h-5 rounded border-zinc-600 bg-zinc-900 text-emerald-500 focus:ring-emerald-500 cursor-pointer"
+                                                    onChange={(checked) => updateDiscountCount(customer.id, checked ? 1 : 0)}
                                                 />
-                                                <input
-                                                    type="checkbox"
+                                                <Checkbox
                                                     checked={customer.discounts_used === 2}
-                                                    onChange={(e) => updateDiscountCount(customer.id, e.target.checked ? 2 : 1)}
-                                                    className="w-5 h-5 rounded border-zinc-600 bg-zinc-900 text-emerald-500 focus:ring-emerald-500 cursor-pointer"
+                                                    onChange={(checked) => updateDiscountCount(customer.id, checked ? 2 : 1)}
                                                 />
                                             </div>
                                         </td>

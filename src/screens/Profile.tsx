@@ -82,14 +82,14 @@ export default function Profile() {
                 <header className="rounded-2xl border border-zinc-700/70 bg-zinc-800/70 p-6 shadow-xl backdrop-blur">
                     <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center">
                         <div
-                            className="flex h-16 w-16 items-center justify-center rounded-2xl bg-indigo-500/20 text-xl font-bold text-indigo-300 ring-1 ring-indigo-400/40">
+                            className="flex h-16 w-16 items-center justify-center rounded-2xl bg-violet-500/20 text-xl font-bold text-violet-300 ring-1 ring-violet-400/40">
                             {initials || 'U'}
                         </div>
 
                         <div className="space-y-1">
                             <h1 className="text-2xl font-semibold tracking-tight">Kasutaja profiil</h1>
                             <div className="flex items-center gap-2">
-                                <BadgeAlert className="h-6 w-6 shrink-0 text-red-400"/>
+                                <BadgeAlert className="h-6 w-6 shrink-0 text-violet-300"/>
                                 <p>Andmete muutmiseks pead adminiga kontakteeruma.</p>
                             </div>
                         </div>

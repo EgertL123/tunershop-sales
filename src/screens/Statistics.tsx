@@ -83,7 +83,7 @@ export default function Statistics() {
                     {/* Total vehicles with breakdown */}
                     <div className="mb-6">
                         <div className="mb-4 flex items-center gap-2 text-zinc-300 text-xl">
-                            <span className="text-indigo-300"><ShoppingBasket className="w-5 h-5"/></span>
+                            <span className="text-violet-300"><ShoppingBasket className="w-5 h-5"/></span>
                             <span>Müüke kokku</span>
                         </div>
                         <p className="text-md text-white mb-4">
@@ -92,12 +92,12 @@ export default function Statistics() {
 
                         <div className="space-y-2 ps-6 text-gray-300">
                             <div className="flex items-center gap-2">
-                                <Car className="w-4 h-4 text-indigo-300"/>
+                                <Car className="w-4 h-4 text-violet-300"/>
                                 <span>Tavasõidukeid: <span
                                     className="font-bold text-white">{stats?.totalSales.toLocaleString() ?? '0'}</span></span>
                             </div>
                             <div className="flex items-center gap-2">
-                                <Gem className="w-4 h-4 text-indigo-300"/>
+                                <Gem className="w-4 h-4 text-violet-300"/>
                                 <span>Eritellimusi: <span
                                     className="font-bold text-white">{stats?.totalSpecialOrders.toLocaleString() ?? '0'}</span></span>
                             </div>

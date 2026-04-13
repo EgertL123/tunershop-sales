@@ -32,7 +32,7 @@ function CategoryDropdown({ selectedCategory, categories, onCategoryChange }: Ca
             </button>
 
             {open && (
-                <div className="absolute z-50 mt-2 p-2 bg-zinc-800 border border-zinc-600 rounded-lg shadow-xl min-w-[320px]">
+                <div className="absolute z-50 mt-2 p-2 bg-zinc-800 border border-zinc-600 rounded-lg shadow-xl min-w-[320px] opacity-0 animate-fadeIn">
                     <button
                         onClick={() => { onCategoryChange("all"); setOpen(false); }}
                         className={`w-full text-left px-3 py-1.5 rounded-md text-sm transition mb-1 cursor-pointer

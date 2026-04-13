@@ -247,7 +247,7 @@ export default function SpecialOrders() {
                                         <td className="px-6 py-4 text-sm font-semibold text-emerald-400">
                                             {order.price.toLocaleString()}
                                         </td>
-                                        <td className="px-6 py-4 text-sm font-mono text-indigo-300 uppercase">{order.plate}</td>
+                                        <td className="px-6 py-4 text-sm font-mono text-violet-300 uppercase">{order.plate}</td>
                                         <td className="px-6 py-4 text-sm text-zinc-200">{order.buyer_name}</td>
                                         <td className="px-6 py-4 text-sm font-medium text-white">{order.display_name}</td>
                                         {isAdmin && (

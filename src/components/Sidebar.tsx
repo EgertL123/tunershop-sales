@@ -9,7 +9,7 @@ export default function Sidebar() {
     const [isPayrollAuthorized, setIsPayrollAuthorized] = useState(false)
 
     useEffect(() => {
-        // Check if user has payroll access
+        // Check if user has access to salaries page
         const fetchUser = async () => {
             const {data: {user}} = await supabase.auth.getUser()
             if (user) {
