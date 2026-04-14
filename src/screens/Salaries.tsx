@@ -203,7 +203,7 @@ export default function Salaries() {
                 <h1 className="text-3xl">Palgad</h1>
             </div>
 
-            <div className="flex items-center gap-2 text-md text-white font-bold">
+            <div className="flex items-center gap-2 text-lg text-white font-bold">
                 <Info className="w-8 h-8 text-violet-300"/>
                 {periodStart
                     ? `Periood algas: ${new Date(periodStart).toLocaleString('et-EE')}`
@@ -219,7 +219,7 @@ export default function Salaries() {
                                 <th className="px-6 py-4 text-sm font-bold text-zinc-200">
                                     <div className="flex items-center gap-2">
                                         <User className="w-5 h-5 text-violet-300 shrink-0"/>
-                                        Müüja
+                                        Töötaja
                                     </div>
                                 </th>
                                 <th className="px-6 py-4 text-sm font-bold text-zinc-200">
