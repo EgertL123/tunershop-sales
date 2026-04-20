@@ -5,7 +5,7 @@ import PaySalariesConfirm from '../components/salaries/PaySalariesConfirm.tsx'
 import {
     User,
     Activity,
-    CircleDollarSign,
+    Banknote,
     Shield,
     Check,
     Info,
@@ -236,7 +236,7 @@ export default function Salaries() {
                                 </th>
                                 <th className="px-6 py-4 text-sm font-bold text-zinc-200">
                                     <div className="flex items-center gap-2">
-                                        <CircleDollarSign className="w-5 h-5 text-violet-300 shrink-0"/>
+                                        <Banknote className="w-5 h-5 text-violet-300 shrink-0"/>
                                         Palk
                                     </div>
                                 </th>
@@ -309,9 +309,9 @@ export default function Salaries() {
                             <button
                                 onClick={() => setShowPayConfirm(true)}
                                 disabled={paying}
-                                className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-lg transition cursor-pointer disabled:opacity-50"
+                                className="inline-flex items-center gap-2 px-4 py-2 bg-zinc-900 hover:bg-zinc-800 text-white font-bold rounded-lg transition cursor-pointer disabled:opacity-50"
                             >
-                                <Check className="w-5 h-5"/>
+                                <Check className="text-emerald-400 w-5 h-5"/>
                                 Palgad on makstud
                             </button>
                         </div>

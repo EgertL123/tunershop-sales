@@ -1,12 +1,13 @@
 import {useEffect, useState} from 'react'
 import {NavLink, Link} from 'react-router-dom'
 import tunershopLogo from '../assets/images/tunershop-logo.svg'
-import {House, Warehouse, Banknote, TrendingUp, User, Gem, Menu, X, Handshake, ClipboardList} from 'lucide-react'
+import {House, Warehouse, Banknote, TrendingUp, User, Gem, Menu, X, Handshake, ClipboardList, Gavel} from 'lucide-react'
 import {supabase} from "../supabaseClient.ts";
 
 export default function Sidebar() {
     const [mobileOpen, setMobileOpen] = useState(false)
     const [isPayrollAuthorized, setIsPayrollAuthorized] = useState(false)
+    const [isAdminAuthorized, setIsAdminAuthorized] = useState(false)
 
     useEffect(() => {
         // Check if user has access to salaries page
@@ -20,6 +21,10 @@ export default function Sidebar() {
                     .single()
                 setIsPayrollAuthorized(
                     data?.rank === 'Raamatupidaja' ||
+                    data?.rank === 'CEO' ||
+                    data?.is_admin === true
+                )
+                setIsAdminAuthorized(
                     data?.rank === 'CEO' ||
                     data?.is_admin === true
                 )
@@ -39,39 +44,45 @@ export default function Sidebar() {
         <>
             <nav className="flex-1 space-y-2">
                 <NavLink to="/dashboard" className={linkClass} onClick={() => setMobileOpen(false)}>
-                    <House className=" mr-2"/>
+                    <House className="mr-2"/>
                     Avaleht
                 </NavLink>
                 <NavLink to="/statistics" className={linkClass} onClick={() => setMobileOpen(false)}>
-                    <TrendingUp className=" mr-2"/>
+                    <TrendingUp className="mr-2"/>
                     Statistika
                 </NavLink>
                 <NavLink to="/stock" className={linkClass} onClick={() => setMobileOpen(false)}>
-                    <Warehouse className=" mr-2"/>
+                    <Warehouse className="mr-2"/>
                     Limiidid
                 </NavLink>
                 <NavLink to="/special-orders" className={linkClass} onClick={() => setMobileOpen(false)}>
-                    <Gem className=" mr-2"/>
+                    <Gem className="mr-2"/>
                     Eritellimused
                 </NavLink>
                 <NavLink to="/discounts" className={linkClass} onClick={() => setMobileOpen(false)}>
-                    <Handshake className=" mr-2"/>
+                    <Handshake className="mr-2"/>
                     Koostööd
                 </NavLink>
                 <NavLink to="/vehicles" className={linkClass} onClick={() => setMobileOpen(false)}>
-                    <ClipboardList className=" mr-2"/>
+                    <ClipboardList className="mr-2"/>
                     Kataloog
                 </NavLink>
                 {isPayrollAuthorized && (
                     <NavLink to="/salaries" className={linkClass} onClick={() => setMobileOpen(false)}>
-                        <Banknote className=" mr-2"/>
+                        <Banknote className="mr-2"/>
                         Palgad
+                    </NavLink>
+                )}
+                {isAdminAuthorized && (
+                    <NavLink to="/admin" className={linkClass} onClick={() => setMobileOpen(false)}>
+                        <Gavel className="mr-2"/>
+                        Admin
                     </NavLink>
                 )}
             </nav>
             <nav>
                 <NavLink to="/profile" className={linkClass} onClick={() => setMobileOpen(false)}>
-                    <User className=" mr-2"/>
+                    <User className="mr-2"/>
                     Profiil
                 </NavLink>
             </nav>

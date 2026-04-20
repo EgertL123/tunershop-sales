@@ -12,6 +12,7 @@ import Statistics from './screens/Statistics'
 import Salaries from './screens/Salaries'
 import Discounts from './screens/Discounts'
 import VehiclesList from './screens/VehiclesList'
+import Admin from './screens/Admin'
 
 function ProtectedRoute({children}: { children: React.ReactNode }) {
     const [session, setSession] = useState<boolean | null>(null)
@@ -62,6 +63,7 @@ function App() {
                     <Route path="/special-orders" element={<SpecialOrders/>}/>
                     <Route path="/discounts" element={<Discounts/>}/>
                     <Route path="/vehicles" element={<VehiclesList/>}/>
+                    <Route path="/admin" element={<Admin/>}/>
                     <Route path="/profile" element={<Profile/>}/>
                 </Route>
             </Routes>
