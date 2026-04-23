@@ -1,7 +1,5 @@
 import {useEffect, useState} from 'react'
 import {supabase} from '../supabaseClient'
-import LoadingSpinner from '../components/LoadingSpinner.tsx'
-import PaySalariesConfirm from '../components/salaries/PaySalariesConfirm.tsx'
 import {
     User,
     Activity,
@@ -13,6 +11,8 @@ import {
     CreditCard,
     TriangleAlert
 } from 'lucide-react'
+import LoadingSpinner from '../components/LoadingSpinner.tsx'
+import PaySalariesConfirm from '../components/salaries/PaySalariesConfirm.tsx'
 
 type WorkerSalary = {
     user_id: string

@@ -134,7 +134,13 @@ export default function EditSpecialOrder({open, onClose, order, onSave}: Props) 
 
                     {/* Fields */}
                     {[
-                        {label: 'Sõiduki nimi', name: 'vehicle_name', placeholder: 'Sõiduki nimi', type: 'text', maxLength: 70},
+                        {
+                            label: 'Sõiduki nimi',
+                            name: 'vehicle_name',
+                            placeholder: 'Sõiduki nimi',
+                            type: 'text',
+                            maxLength: 70
+                        },
                         {label: 'Hind', name: 'price', placeholder: 'Hind', type: 'number', maxLength: 8},
                         {label: 'Numbrimärk', name: 'plate', placeholder: 'Numbrimärk', type: 'text', maxLength: 8},
                         {label: 'Ostja', name: 'buyer_name', placeholder: 'Ostja', type: 'text', maxLength: 70},

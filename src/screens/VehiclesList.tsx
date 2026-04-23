@@ -1,6 +1,5 @@
 import {useEffect, useState} from "react";
 import {supabase} from '../supabaseClient'
-import LoadingSpinner from "../components/LoadingSpinner.tsx";
 import {
     CarFront,
     CircleDollarSign,
@@ -9,9 +8,10 @@ import {
     Search,
     Sparkles,
 } from "lucide-react";
+import {usePagination} from "../hooks/usePagination.ts";
+import LoadingSpinner from "../components/LoadingSpinner.tsx";
 import Pagination from "../components/Pagination.tsx";
 import CategoryDropdown from "../components/CategoryDropdown.tsx";
-import {usePagination} from "../hooks/usePagination.ts";
 
 type Vehicle = {
     id: string
@@ -36,7 +36,14 @@ export default function VehiclesList() {
         return matchesCategory && matchesSearch
     })
 
-    const {currentPage, totalPages, currentItems, handlePrevious, handleNext, resetPage} = usePagination(filteredVehicles, 10)
+    const {
+        currentPage,
+        totalPages,
+        currentItems,
+        handlePrevious,
+        handleNext,
+        resetPage
+    } = usePagination(filteredVehicles, 10)
 
     useEffect(() => {
         const fetchVehicles = async () => {
@@ -107,7 +114,8 @@ export default function VehiclesList() {
 
                         {/* Search Filter */}
                         <div className="relative flex-1">
-                            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-zinc-400 z-10"/>
+                            <Search
+                                className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-zinc-400 z-10"/>
                             <input
                                 type="text"
                                 placeholder="Otsi sõiduki nime järgi..."

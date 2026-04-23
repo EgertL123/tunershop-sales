@@ -1,8 +1,8 @@
 import {useEffect, useState} from 'react'
 import {supabase} from '../supabaseClient'
+import {ShoppingBasket, Gem, Crown, Car, Trophy, Users} from 'lucide-react'
 import LoadingSpinner from '../components/LoadingSpinner.tsx'
 import InfoCard from '../components/InfoCard.tsx'
-import {ShoppingBasket, Gem, Crown, Car, Trophy, Users} from 'lucide-react'
 
 type Stats = {
     totalSales: number

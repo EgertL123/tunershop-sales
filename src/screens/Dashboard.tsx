@@ -12,12 +12,12 @@ import {
     Gavel
 } from 'lucide-react'
 import {supabase} from '../supabaseClient'
+import {usePagination} from '../hooks/usePagination'
 import AddSale from '../components/sales/AddSale.tsx'
 import EditSaleDialog from '../components/sales/EditSale.tsx'
 import DeleteSaleDialog from '../components/sales/DeleteSale.tsx'
 import LoadingSpinner from '../components/LoadingSpinner.tsx'
 import Pagination from '../components/Pagination.tsx'
-import {usePagination} from '../hooks/usePagination'
 
 type Sale = {
     id: string

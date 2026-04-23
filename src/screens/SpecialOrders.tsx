@@ -12,9 +12,9 @@ import {
     Gavel
 } from 'lucide-react'
 import {supabase} from '../supabaseClient'
+import {usePagination} from '../hooks/usePagination'
 import LoadingSpinner from '../components/LoadingSpinner.tsx'
 import Pagination from '../components/Pagination.tsx'
-import {usePagination} from '../hooks/usePagination'
 import AddSpecialOrder from "../components/specialOrders/AddSpecialOrder.tsx"
 import EditSpecialOrderDialog from "../components/specialOrders/EditSpecialOrder.tsx"
 import DeleteSpecialOrder from "../components/specialOrders/DeleteSpecialOrder.tsx"

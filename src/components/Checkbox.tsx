@@ -1,4 +1,4 @@
-import { Check } from 'lucide-react'
+import {Check} from 'lucide-react'
 
 interface CheckboxProps {
     checked: boolean
@@ -6,7 +6,7 @@ interface CheckboxProps {
     disabled?: boolean
 }
 
-export default function Checkbox({ checked, onChange, disabled = false }: CheckboxProps) {
+export default function Checkbox({checked, onChange, disabled = false}: CheckboxProps) {
     return (
         <label className="relative inline-flex cursor-pointer">
             <input
@@ -22,7 +22,7 @@ export default function Checkbox({ checked, onChange, disabled = false }: Checkb
                     : 'border-zinc-600 bg-zinc-700'
             } ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}>
                 {checked && (
-                    <Check className="w-4 h-4 text-zinc-900" strokeWidth={3} />
+                    <Check className="w-4 h-4 text-zinc-900" strokeWidth={3}/>
                 )}
             </div>
         </label>

@@ -11,9 +11,9 @@ import {
     Edit2,
     Trash2
 } from 'lucide-react'
-import LoadingSpinner from '../components/LoadingSpinner.tsx'
 import {supabase} from "../supabaseClient.ts";
 import {usePagination} from "../hooks/usePagination.ts";
+import LoadingSpinner from '../components/LoadingSpinner.tsx'
 import Pagination from "../components/Pagination.tsx";
 import EditUserDialog from "../components/admin/EditUser.tsx"
 import DeleteUserDialog from "../components/admin/DeleteUser.tsx";
@@ -128,7 +128,7 @@ export default function Admin() {
             />
 
             {loading ? (
-            <LoadingSpinner/>
+                <LoadingSpinner/>
             ) : (
                 <>
                     {/* Table */}

@@ -1,8 +1,8 @@
 import {useCallback, useEffect, useRef, useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 import {supabase} from '../supabaseClient'
-import tunershopLogo from '../assets/images/tunershop-logo.svg'
 import {TriangleAlert} from 'lucide-react'
+import tunershopLogo from '../assets/images/tunershop-logo.svg'
 import loginBackground from '../assets/images/login-background.webp'
 
 const REQUIRED_GUILD_ID = '863795516743090207'
@@ -174,7 +174,8 @@ function Login() {
                 </div>
 
                 {errorMessage && (
-                    <div className="mb-4 rounded-lg bg-red-500/40 border border-red-500 backdrop-blur-sm p-4 text-red-200">
+                    <div
+                        className="mb-4 rounded-lg bg-red-500/40 border border-red-500 backdrop-blur-sm p-4 text-red-200">
                         <p>{errorMessage}</p>
                     </div>
                 )}

@@ -1,6 +1,5 @@
 import {useEffect, useState} from 'react'
 import {supabase} from '../supabaseClient'
-import LoadingSpinner from '../components/LoadingSpinner.tsx'
 import {
     CirclePlus,
     Trash2,
@@ -14,6 +13,7 @@ import {
     Search,
     X,
 } from 'lucide-react'
+import LoadingSpinner from '../components/LoadingSpinner.tsx'
 import AddDiscount from '../components/discounts/AddDiscount.tsx'
 import DeleteDiscount from '../components/discounts/DeleteDiscount.tsx'
 import Pagination from '../components/Pagination.tsx'
