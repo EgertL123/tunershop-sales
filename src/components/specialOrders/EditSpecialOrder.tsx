@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react'
 import {X, Edit2, Check} from 'lucide-react'
 import {supabase} from '../../supabaseClient.ts'
+import {showError, showSuccess} from '../../services/ToastService.tsx'
 
 type Props = {
     open: boolean
@@ -30,7 +31,6 @@ export default function EditSpecialOrder({open, onClose, order, onSave}: Props) 
         buyer_name: '',
     })
     const [loading, setLoading] = useState(false)
-    const [error, setError] = useState<string | null>(null)
 
     useEffect(() => {
         if (order) {
@@ -40,7 +40,6 @@ export default function EditSpecialOrder({open, onClose, order, onSave}: Props) 
                 plate: order.plate,
                 buyer_name: order.buyer_name,
             })
-            setError(null)
         }
     }, [order])
 
@@ -54,27 +53,26 @@ export default function EditSpecialOrder({open, onClose, order, onSave}: Props) 
     }
 
     const handleSubmit = async () => {
-        setError(null)
 
         const priceNum = Number(form.price)
 
         if (!form.vehicle_name.trim() || !form.price || !form.plate.trim() || !form.buyer_name.trim()) {
-            setError('Kõik väljad peavad olema täidetud!')
+            showError('Kõik väljad peavad olema täidetud!')
             return
         }
 
         if (!isNaN(Number(form.buyer_name))) {
-            setError('Ostja nimi ei saa olla number.')
+            showError('Ostja nimi ei saa olla number.')
             return
         }
 
         if (priceNum <= 0) {
-            setError('Hind ei saa olla null või negatiivne.')
+            showError('Hind ei saa olla null või negatiivne.')
             return
         }
 
         if (form.price.length > 7) {
-            setError('Hind ei saa olla pikem kui 7 numbrit.')
+            showError('Hind ei saa olla pikem kui 7 numbrit.')
             return
         }
 
@@ -91,11 +89,12 @@ export default function EditSpecialOrder({open, onClose, order, onSave}: Props) 
             .eq('id', order!.id)
 
         if (updateError) {
-            setError(updateError.message)
+            showError(updateError.message)
             setLoading(false)
             return
         }
 
+        showSuccess('Eritellimus edukalt muudetud.')
         setLoading(false)
         onSave()
         onClose()
@@ -161,8 +160,6 @@ export default function EditSpecialOrder({open, onClose, order, onSave}: Props) 
                         </div>
                     ))}
 
-                    {error && <p className="text-sm text-red-400">{error}</p>}
-
                     <div className="flex justify-end gap-3 pt-1">
                         <button
                             type="button"
@@ -176,7 +173,6 @@ export default function EditSpecialOrder({open, onClose, order, onSave}: Props) 
                         </button>
                         <button
                             type="submit"
-                            onClick={handleSubmit}
                             disabled={loading}
                             className="px-4 py-2 text-sm font-semibold rounded-lg bg-blue-600 hover:bg-blue-700 text-white transition disabled:opacity-50 cursor-pointer flex items-center gap-1"
                         >

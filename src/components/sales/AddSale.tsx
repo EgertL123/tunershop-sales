@@ -1,6 +1,7 @@
 import {useState} from 'react'
 import {X, CirclePlus, Check} from 'lucide-react'
 import {supabase} from '../../supabaseClient.ts'
+import {showError, showSuccess} from '../../services/ToastService.tsx'
 
 type Props = {
     open: boolean
@@ -26,7 +27,6 @@ const defaultForm: SaleForm = {
 export default function AddSaleDialog({open, onClose}: Props) {
     const [form, setForm] = useState<SaleForm>(defaultForm)
     const [loading, setLoading] = useState(false)
-    const [error, setError] = useState<string | null>(null)
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setForm((prev) => ({...prev, [e.target.name]: e.target.value}))
@@ -38,30 +38,29 @@ export default function AddSaleDialog({open, onClose}: Props) {
     }
 
     const handleSubmit = async () => {
-        setError(null)
 
         const priceNum = Number(form.price)
 
         if (!form.vehicle_name.trim() || !form.price || !form.plate.trim() || !form.buyer_name.trim()) {
-            setError('Kõik väljad peavad olema täidetud!')
+            showError('Kõik väljad peavad olema täidetud!')
             return
         }
 
         if (priceNum <= 0) {
-            setError('Hind ei saa olla null või negatiivne.')
+            showError('Hind ei saa olla null või negatiivne.')
             return
         }
 
         if (!isNaN(Number(form.buyer_name))) {
-            setError('Ostja nimi ei saa olla number.')
+            showError('Ostja nimi ei saa olla number.')
             return
         }
 
         if (form.price.length > 7) {
-            setError('Hind ei saa olla pikem kui 7 numbrit.');
+            showError('Hind ei saa olla pikem kui 7 numbrit.');
             return
         } else if (!form.sale_class) {
-            setError('Palun vali klass!')
+            showError('Palun vali klass!')
             return
         }
 
@@ -69,7 +68,7 @@ export default function AddSaleDialog({open, onClose}: Props) {
 
         const {data: {user}} = await supabase.auth.getUser()
         if (!user) {
-            setError('Kasutaja ei ole sisse logitud.')
+            showError('Kasutaja ei ole sisse logitud.')
             setLoading(false)
             return
         }
@@ -91,11 +90,12 @@ export default function AddSaleDialog({open, onClose}: Props) {
         })
 
         if (insertError) {
-            setError(insertError.message)
+            showError(insertError.message)
             setLoading(false)
             return
         }
 
+        showSuccess('Müük edukalt lisatud.')
         setForm(defaultForm)
         setLoading(false)
         onClose()
@@ -182,8 +182,6 @@ export default function AddSaleDialog({open, onClose}: Props) {
                             )}
                         </div>
                     ))}
-
-                    {error && <p className="text-sm text-red-400">{error}</p>}
 
                     <div className="flex justify-end gap-3 pt-1">
                         <button

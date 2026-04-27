@@ -1,6 +1,7 @@
 import {useState} from 'react'
 import {X, CirclePlus, Check} from 'lucide-react'
 import {supabase} from '../../supabaseClient.ts'
+import {showError, showSuccess} from '../../services/ToastService.tsx'
 
 type Props = {
     open: boolean
@@ -23,7 +24,6 @@ const defaultForm: DiscountForm = {
 export default function AddDiscount({open, onClose, onSave}: Props) {
     const [form, setForm] = useState<DiscountForm>(defaultForm)
     const [loading, setLoading] = useState(false)
-    const [error, setError] = useState<string | null>(null)
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         setForm((prev) => ({...prev, [e.target.name]: e.target.value}))
@@ -35,15 +35,14 @@ export default function AddDiscount({open, onClose, onSave}: Props) {
     }
 
     const handleSubmit = async () => {
-        setError(null)
 
         if (!form.name.trim() || !isNaN(Number(form.name))) {
-            setError('Töötaja nimi peab olema täidetud!')
+            showError('Töötaja nimi peab olema täidetud!')
             return
         }
 
         if (!form.company) {
-            setError('Ettevõte peab olema valitud!')
+            showError('Ettevõte peab olema valitud!')
             return
         }
 
@@ -56,11 +55,12 @@ export default function AddDiscount({open, onClose, onSave}: Props) {
         })
 
         if (insertError) {
-            setError(insertError.message)
+            showError(insertError.message)
             setLoading(false)
             return
         }
 
+        showSuccess('Töötaja edukalt lisatud.')
         setForm(defaultForm)
         setLoading(false)
         onSave()
@@ -130,8 +130,6 @@ export default function AddDiscount({open, onClose, onSave}: Props) {
                             ))}
                         </select>
                     </div>
-
-                    {error && <p className="text-sm text-red-400">{error}</p>}
 
                     <div className="flex justify-end gap-3 pt-1">
                         <button

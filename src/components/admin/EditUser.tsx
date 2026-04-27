@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react'
 import {X, Edit2, Check} from 'lucide-react'
 import {supabase} from '../../supabaseClient.ts'
+import {showError, showSuccess} from '../../services/ToastService.tsx'
 
 type Props = {
     open: boolean
@@ -37,7 +38,6 @@ export default function EditUserDialog({open, onClose, user, onSave}: Props) {
         rank: '',
     })
     const [loading, setLoading] = useState(false)
-    const [error, setError] = useState<string | null>(null)
 
     useEffect(() => {
         if (user) {
@@ -46,7 +46,6 @@ export default function EditUserDialog({open, onClose, user, onSave}: Props) {
                 account_number: user.account_number || '',
                 rank: user.rank,
             })
-            setError(null)
         }
     }, [user])
 
@@ -64,15 +63,14 @@ export default function EditUserDialog({open, onClose, user, onSave}: Props) {
     }
 
     const handleSubmit = async () => {
-        setError(null)
 
         if (!form.display_name.trim() || !form.account_number.trim()) {
-            setError('Kõik väljad peavad olema täidetud!')
+            showError('Kõik väljad peavad olema täidetud!')
             return
         }
 
         if (!form.rank) {
-            setError('Palun vali auaste!')
+            showError('Palun vali auaste!')
             return
         }
 
@@ -88,11 +86,12 @@ export default function EditUserDialog({open, onClose, user, onSave}: Props) {
             .eq('id', user!.id)
 
         if (updateError) {
-            setError(updateError.message)
+            showError(updateError.message)
             setLoading(false)
             return
         }
 
+        showSuccess('Kasutaja edukalt muudetud.')
         setLoading(false)
         onSave()
         onClose()
@@ -175,9 +174,6 @@ export default function EditUserDialog({open, onClose, user, onSave}: Props) {
                             ))}
                         </select>
                     </div>
-
-
-                    {error && <p className="text-sm text-red-400">{error}</p>}
 
                     <div className="flex justify-end gap-3 pt-1">
                         <button

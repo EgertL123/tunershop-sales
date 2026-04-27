@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react'
 import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom'
 import {supabase} from './supabaseClient'
+import {Toaster} from 'react-hot-toast'
 import Login from './screens/Login'
 import SetupProfile from './screens/SetupProfile'
 import Dashboard from './screens/Dashboard'
@@ -37,6 +38,9 @@ function ProtectedRoute({children}: { children: React.ReactNode }) {
 function App() {
     return (
         <BrowserRouter>
+            <Toaster position="top-right"
+            reverseOrder={false}
+            />
             <Routes>
                 <Route path="/" element={<Login/>}/>
 

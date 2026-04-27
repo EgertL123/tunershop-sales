@@ -1,6 +1,7 @@
 import {Trash2, X} from 'lucide-react'
 import {supabase} from '../../supabaseClient.ts'
 import {useState} from 'react'
+import {showError, showSuccess} from '../../services/ToastService.tsx'
 
 type Props = {
     open: boolean
@@ -14,13 +15,11 @@ type Props = {
 
 export default function DeleteSpecialOrder({open, onClose, order, onDelete}: Props) {
     const [loading, setLoading] = useState(false)
-    const [error, setError] = useState<string | null>(null)
 
     const handleDelete = async () => {
         if (!order) return
 
         setLoading(true)
-        setError(null)
 
         const {error: deleteError} = await supabase
             .from('special_orders')
@@ -28,11 +27,12 @@ export default function DeleteSpecialOrder({open, onClose, order, onDelete}: Pro
             .eq('id', order.id)
 
         if (deleteError) {
-            setError(deleteError.message)
+            showError(deleteError.message)
             setLoading(false)
             return
         }
 
+        showSuccess('Eritellimus edukalt kustutatud.')
         setLoading(false)
         onDelete()
         onClose()
@@ -69,8 +69,6 @@ export default function DeleteSpecialOrder({open, onClose, order, onDelete}: Pro
                             Oled sa kindel, et soovid seda eritellimust kustutada?
                         </p>
                     </div>
-
-                    {error && <p className="text-sm text-red-400">{error}</p>}
 
                     <div className="flex justify-end gap-3 pt-1">
                         <button

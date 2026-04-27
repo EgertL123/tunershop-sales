@@ -1,6 +1,7 @@
 import {useState} from 'react'
 import {X, Trash2} from 'lucide-react'
 import {supabase} from '../../supabaseClient.ts'
+import {showError, showSuccess} from '../../services/ToastService.tsx'
 
 type Props = {
     open: boolean
@@ -12,12 +13,10 @@ type Props = {
 
 export default function DeleteSale({open, onClose, saleId, onDelete}: Props) {
     const [loading, setLoading] = useState(false)
-    const [error, setError] = useState<string | null>(null)
 
     const handleConfirmDelete = async () => {
         if (!saleId) return
 
-        setError(null)
         setLoading(true)
 
         try {
@@ -27,17 +26,18 @@ export default function DeleteSale({open, onClose, saleId, onDelete}: Props) {
                 .eq('id', saleId)
 
             if (deleteError) {
-                setError(deleteError.message)
+                showError(deleteError.message)
                 setLoading(false)
                 return
             }
 
+            showSuccess('Müük edukalt kustatud.')
             setLoading(false)
             onDelete()
             onClose()
         } catch (err) {
             console.error('Error deleting sale:', err)
-            setError('Müüki ei saanud kustutada.')
+            showError('Müüki ei saanud kustutada.')
             setLoading(false)
         }
     }
@@ -77,8 +77,6 @@ export default function DeleteSale({open, onClose, saleId, onDelete}: Props) {
                             Oled sa kindel, et soovid seda müüki kustutada?
                         </p>
                     </div>
-
-                    {error && <p className="text-sm text-red-400">{error}</p>}
 
                     {/* Buttons */}
                     <div className="flex justify-end gap-3 pt-1">
