@@ -42,6 +42,7 @@ export default function Dashboard() {
 
     const {currentPage, totalPages, currentItems, handlePrevious, handleNext, resetPage} = usePagination(sales, 10)
 
+    // Check if user is admin to grant edit and delete access
     useEffect(() => {
         const fetchCurrentUser = async () => {
             try {
@@ -62,6 +63,7 @@ export default function Dashboard() {
         fetchCurrentUser()
     }, [])
 
+    // Fetch all sales
     const fetchSales = async () => {
         setLoading(true)
         try {

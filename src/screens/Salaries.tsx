@@ -23,6 +23,7 @@ type WorkerSalary = {
     account_number: string | null
 }
 
+// Calculate salary based on user rank
 const RANK_MULTIPLIERS: Record<string, number> = {
     'Katseajaline': 0.65,
     'Müügiesindaja': 0.75,
@@ -32,6 +33,7 @@ const RANK_MULTIPLIERS: Record<string, number> = {
     'CEO': 1.0,
 }
 
+// Calculate salary based on vehicle price
 function getCommission(price: number): number {
     if (price < 250000) {
         return price * 0.10
@@ -52,6 +54,7 @@ export default function Salaries() {
     const [copiedId, setCopiedId] = useState<string | null>(null)
     const [showPayConfirm, setShowPayConfirm] = useState(false)
 
+    // Check if user is authorized to view page
     useEffect(() => {
         const fetchCurrentUser = async () => {
             const {data: {user}} = await supabase.auth.getUser()

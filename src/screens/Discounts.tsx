@@ -39,6 +39,7 @@ export default function Discounts() {
     const [searchTerm, setSearchTerm] = useState('')
     const [currentPage, setCurrentPage] = useState(1)
 
+    // Fetch all discounts
     const fetchDiscountsData = async () => {
         const {data, error} = await supabase
             .from('discount')
@@ -191,7 +192,7 @@ export default function Discounts() {
                     <AddDiscount
                         open={dialogOpen}
                         onClose={() => setDialogOpen(false)}
-                        onSave={fetchDiscountsData}
+                        onSave={() => setDialogOpen(false)}
                     />
                 </div>
             )}

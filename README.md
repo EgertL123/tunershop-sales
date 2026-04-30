@@ -1,73 +1,114 @@
-# React + TypeScript + Vite
+# Tunershop Sales Management System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A web application specifically made for an ingame company named Tunershop where affiliated users can manage their sales. Project features authentication via Discord and realtime updates to tables.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Realtime Sales Tracking** - Track vehicle sales with instant updates across all connected users
+- **Employee Management** - Manage employee profiles
+- **Automated Salary Calculation** - Calculate salaries based on vehicle price and employee rank
+- **Discord Authentication** - Secure login via Discord OAuth
+- **Role-Based Access Control** - Different permissions for CEO, accountant and regular employees
+- **Stock Management** - Track vehicle stock for S and A class vehicles
+- **Special Orders** - Manage custom vehicle orders separately from regular sales
+- **Statistics Dashboard** - Realtime analytics and performance metrics
+- **Responsive Design** - Works seamlessly on desktop and mobile devices
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Frontend**: React 19 + TypeScript + Vite
+- **Styling**: Tailwind CSS 4
+- **Icons**: Lucide React
+- **Backend**: Supabase (PostgreSQL + Authentication)
+- **Real-time**: WebSocket subscriptions
+- **Notifications**: React Hot Toast
+- **Routing**: React Router v7
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Prerequisites
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- Node.js 18+
+- npm or yarn
+- Supabase account
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Installation
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+1. Clone the repository
+```bash
+git clone https://github.com/egertl123/tunershop-sales.git
+cd tunershop-sales
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+2. Install dependencies
+```bash
+npm install
 ```
+
+3. Create `.env.local` and add your Supabase credentials:
+```
+VITE_SUPABASE_URL=your_supabase_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+VITE_DISCORD_GUILD_ID=your_discord_guild_id
+```
+
+4. Start the development server
+```bash
+npm run dev
+```
+
+5. Open [http://localhost:5173](http://localhost:5173) in your browser
+
+## Available Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build locally
+- `npm run lint` - Run ESLint
+
+## Project Structure
+
+```
+src/
+├── screens/          # Page components (Dashboard, Admin, Salaries, etc.)
+├── components/       # Reusable UI components
+├── layouts/          # Layout wrappers
+├── hooks/            # Custom React hooks
+├── services/         # Business logic (Supabase, Toast notifications)
+├── App.tsx           # Main app with routing
+└── main.tsx          # Entry point
+```
+
+## Key Pages
+
+- **Dashboard** (`/dashboard`) - Main sales table with realtime updates
+- **Discounts** (`/discounts`) - Discounts for company employees that have a cooperation agreement with Tunershop 
+- **Admin** (`/admin`) - User management and permissions
+- **Salaries** (`/salaries`) - Weekly salary calculations
+- **Statistics** (`/statistics`) - Analytics and performance metrics
+- **Stock** (`/stock`) - Vehicle stock management
+- **Special Orders** (`/special-orders`) - Special order tracking
+- **Profile** (`/profile`) - User profile
+
+## Security
+
+- Row Level Security (RLS) policies on all database tables
+- Discord OAuth 2.0 authentication
+- Bearer token authorization
+- Guild membership verification
+
+## Deployment
+
+The app is configured for GitHub Pages deployment:
+
+```bash
+npm run build
+npm run deploy
+```
+
+Custom domain setup via CNAME file.
+
+## Support
+
+For questions or issues, please contact @EgertL123 on GitHub.
+

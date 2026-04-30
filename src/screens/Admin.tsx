@@ -38,6 +38,7 @@ export default function Admin() {
 
     const {currentPage, totalPages, currentItems, handlePrevious, handleNext} = usePagination(users, 10)
 
+    // Check if user is authorized to view admin page
     useEffect(() => {
         const fetchCurrentUser = async () => {
             const {data: {user}} = await supabase.auth.getUser()
@@ -56,6 +57,7 @@ export default function Admin() {
         fetchCurrentUser()
     }, [])
 
+    // Fetch all users from Supabase
     const fetchUsers = async () => {
         setLoading(true)
         try {

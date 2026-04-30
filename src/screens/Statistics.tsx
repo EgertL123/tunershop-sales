@@ -38,6 +38,7 @@ export default function Statistics() {
                 const sales = salesResult.data ?? []
                 const specialOrders = specialOrdersResult.data ?? []
 
+                // Gets most sold vehicle
                 const vehicleMap: Record<string, number> = {}
                 for (const sale of sales) {
                     vehicleMap[sale.vehicle_name] = (vehicleMap[sale.vehicle_name] ?? 0) + 1
@@ -45,12 +46,14 @@ export default function Statistics() {
 
                 const mostPopularVehicle = Object.entries(vehicleMap).sort((a, b) => b[1] - a[1])[0]?.[0] ?? null
 
+                // Gets most frequent buyer
                 const buyerMap: Record<string, number> = {}
                 for (const sale of sales) {
                     buyerMap[sale.buyer_name] = (buyerMap[sale.buyer_name] ?? 0) + 1
                 }
                 const mostFrequentBuyer = Object.entries(buyerMap).sort((a, b) => b[1] - a[1])[0]?.[0] ?? null
 
+                // Gets top seller
                 const workerMap: Record<string, number> = {}
                 for (const sale of sales) {
                     const workerName = (sale.users as any)?.display_name || 'Tundmatu'

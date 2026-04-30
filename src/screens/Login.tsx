@@ -5,7 +5,7 @@ import {TriangleAlert} from 'lucide-react'
 import tunershopLogo from '../assets/images/tunershop-logo.svg'
 import loginBackground from '../assets/images/login-background.webp'
 
-const REQUIRED_GUILD_ID = '863795516743090207'
+const REQUIRED_GUILD_ID = import.meta.env.VITE_DISCORD_GUILD_ID
 
 type DiscordGuild = {
     id: string

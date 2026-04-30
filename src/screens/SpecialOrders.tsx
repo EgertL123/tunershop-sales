@@ -48,6 +48,7 @@ export default function SpecialOrders() {
         resetPage
     } = usePagination(specialOrders, 10)
 
+    // Check if user is admin to grant edit and delete access
     useEffect(() => {
         const fetchCurrentUser = async () => {
             try {
@@ -68,6 +69,7 @@ export default function SpecialOrders() {
         fetchCurrentUser()
     }, [])
 
+    // Fetch all special orders
     const fetchSpecialOrders = async () => {
         setLoading(true)
         try {

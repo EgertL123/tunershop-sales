@@ -45,6 +45,7 @@ export default function VehiclesList() {
         resetPage
     } = usePagination(filteredVehicles, 10)
 
+    // Fetch vehicles from Supabase
     useEffect(() => {
         const fetchVehicles = async () => {
             setLoading(true)

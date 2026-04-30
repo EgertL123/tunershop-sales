@@ -1,6 +1,8 @@
 import toast from 'react-hot-toast'
 import {CircleCheck, CircleX} from 'lucide-react'
 
+
+// Success alert
 export const showSuccess = (message: string) => {
     toast.success(message, {
         duration: 4000,
@@ -20,6 +22,8 @@ export const showSuccess = (message: string) => {
     })
 }
 
+
+// Error alert
 export const showError = (message: string) => {
     toast.error(message, {
         duration: 4000,
