@@ -176,7 +176,8 @@ export default function AddSaleDialog({open, onClose}: Props) {
                                         <option value="B">B</option>
                                         <option value="C">C</option>
                                         <option value="D">D</option>
-                                        <option value="Väljamüüdud">Väljamüüdud</option>
+                                        {/*<option value="Väljamüüdud">Väljamüüdud</option>
+                                        */}
                                     </select>
                                 </div>
                             )}
