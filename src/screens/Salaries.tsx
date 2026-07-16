@@ -320,7 +320,7 @@ export default function Salaries() {
                             </button>
                             {salaries.length > 0 && (
                                     <div className="flex items-center justify-between">
-                                        <p className="flex items-center gap-2 text-lg font-extrabold text-white">
+                                        <p className="flex items-center gap-2 text-lg font-bold text-white">
                                             Väljamaksed kokku: ${total.toLocaleString()}
                                         </p>
                                     </div>
