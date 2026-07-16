@@ -46,6 +46,7 @@ function getCommission(price: number): number {
 
 export default function Salaries() {
     const [salaries, setSalaries] = useState<WorkerSalary[]>([])
+    const [total, setTotal] = useState(0)
     const [loading, setLoading] = useState(true)
     const [paying, setPaying] = useState(false)
     const [authorized, setAuthorized] = useState<boolean | null>(null)
@@ -146,9 +147,9 @@ export default function Salaries() {
                     account_number: user?.account_number ?? null,
                 }
             })
-
-            setSalaries(result.sort((a, b) => b.total_final - a.total_final))
-        } finally {
+            const sorted = result.sort((a, b) => b.total_final - a.total_final)
+            setSalaries(sorted)
+            setTotal(sorted.reduce((sum, worker) => sum + worker.total_final, 0))        } finally {
             setLoading(false)
         }
     }
@@ -308,7 +309,7 @@ export default function Salaries() {
                     </div>
 
                     {authorized && (
-                        <div className="flex justify-start">
+                        <div className="flex justify-between">
                             <button
                                 onClick={() => setShowPayConfirm(true)}
                                 disabled={paying}
@@ -317,6 +318,13 @@ export default function Salaries() {
                                 <Check className="text-emerald-400 w-5 h-5"/>
                                 Palgad on makstud
                             </button>
+                            {salaries.length > 0 && (
+                                    <div className="flex items-center justify-between">
+                                        <p className="flex items-center gap-2 text-lg font-extrabold text-white">
+                                            Väljamaksed kokku: ${total.toLocaleString()}
+                                        </p>
+                                    </div>
+                            )}
                         </div>
                     )}
                 </>

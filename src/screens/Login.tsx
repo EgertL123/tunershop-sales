@@ -82,7 +82,7 @@ function Login() {
             const isMember = guilds.some((guild) => guild.id === REQUIRED_GUILD_ID)
 
             if (!isMember) {
-                setErrorMessage('Sisselogimiseks pead olema Tunershopi Discordis.')
+                setErrorMessage('Sisselogimiseks pead olema TunerShopi Discordis.')
                 await supabase.auth.signOut()
                 return
             }
