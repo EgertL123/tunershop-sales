@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react'
 import {NavLink, Link} from 'react-router-dom'
-import tunershopLogo from '../assets/images/tunershop-logo.svg'
+import tunershopLogo from '../assets/images/tunershop-logo.webp'
 import {House, Warehouse, Banknote, TrendingUp, User, Gem, Menu, X, Handshake, ClipboardList, Gavel} from 'lucide-react'
 import {supabase} from "../supabaseClient.ts";
 

@@ -2,7 +2,7 @@ import {useCallback, useEffect, useRef, useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 import {supabase} from '../supabaseClient'
 import {TriangleAlert} from 'lucide-react'
-import tunershopLogo from '../assets/images/tunershop-logo.svg'
+import tunershopLogo from '../assets/images/tunershop-logo.webp'
 import loginBackground from '../assets/images/login-background.webp'
 
 const REQUIRED_GUILD_ID = import.meta.env.VITE_DISCORD_GUILD_ID
