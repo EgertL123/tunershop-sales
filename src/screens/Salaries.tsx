@@ -207,7 +207,7 @@ export default function Salaries() {
                 <h1 className="text-3xl">Palgad</h1>
             </div>
 
-            <div className="flex items-center gap-2 text-lg text-white font-bold">
+            <div className="flex items-center gap-2 text-lg text-gray-100 font-bold">
                 <Info className="w-8 h-8 text-violet-300"/>
                 {periodStart
                     ? `Periood algas: ${new Date(periodStart).toLocaleString('et-EE')}`

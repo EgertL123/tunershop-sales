@@ -174,8 +174,8 @@ export default function Discounts() {
                 <h1 className="text-3xl">Koostööd</h1>
             </div>
 
-            <div className="flex items-center gap-2 text-lg text-white font-bold">
-                <Info className="w-8 h-8 text-red-400"/>
+            <div className="flex items-center gap-2 text-lg text-gray-100 font-bold">
+                <Info className="w-8 h-8 text-violet-300"/>
                 Limiidid nullitakse iga kuu alguses automaatselt.
             </div>
 
