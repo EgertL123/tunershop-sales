@@ -8,7 +8,7 @@ export const showSuccess = (message: string) => {
         duration: 4000,
         position: 'top-right',
         style: {
-            background: '#009966',
+            background: '#1b1718',
             color: '#ffffff',
             fontSize: '14px',
             fontWeight: 'bold',
@@ -18,7 +18,7 @@ export const showSuccess = (message: string) => {
             alignItems: 'center',
             gap: '12px'
         },
-        icon: <CircleCheck className="w-6 h-6" />,
+        icon: <CircleCheck className="w-6 h-6 text-green-500" />,
     })
 }
 
@@ -29,7 +29,7 @@ export const showError = (message: string) => {
         duration: 4000,
         position: 'top-right',
         style: {
-            background: '#ff6467',
+            background: '#1b1718',
             color: '#ffffff',
             fontSize: '14px',
             fontWeight: 'bold',
@@ -39,6 +39,6 @@ export const showError = (message: string) => {
             alignItems: 'center',
             gap: '12px'
         },
-        icon: <CircleX className="w-6 h-6" />,
+        icon: <CircleX className="w-6 h-6 text-red-500" />,
     })
 }

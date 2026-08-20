@@ -36,8 +36,8 @@ export default function Sidebar() {
     const linkClass = ({isActive}: { isActive: boolean }) =>
         `flex items-center rounded-lg px-4 py-2 transition ${
             isActive
-                ? 'bg-zinc-700 text-white'
-                : 'text-white hover:bg-zinc-700'
+                ? 'bg-zinc-600 text-white'
+                : 'text-white hover:bg-zinc-600'
         }`
 
     const navLinks = (
@@ -111,7 +111,7 @@ export default function Sidebar() {
 
             {/* Mobile drawer */}
             <div
-                className={`fixed top-0 left-0 h-full w-64 bg-zinc-600/60 backdrop-blur-sm border-r border-zinc-500 p-4 flex flex-col z-50 transform transition-transform duration-300 md:hidden ${
+                className={`fixed top-0 left-0 h-full w-64 bg-zinc-900/60 backdrop-blur-sm border-r border-zinc-600 p-4 flex flex-col z-50 transform transition-transform duration-300 md:hidden ${
                     mobileOpen ? 'translate-x-0' : '-translate-x-full'
                 }`}>
                 <div className="flex items-center justify-end mb-6">
@@ -127,7 +127,7 @@ export default function Sidebar() {
 
             {/* Desktop sidebar */}
             <aside
-                className="hidden md:flex w-64 min-h-screen bg-zinc-600/60 backdrop-blur-sm border-r border-zinc-500 p-4 flex-col sticky top-0">
+                className="hidden md:flex w-64 min-h-screen bg-zinc-900/60 backdrop-blur-sm border-r border-zinc-600 p-4 flex-col sticky top-0">
                 <Link to="/dashboard">
                     <img src={tunershopLogo} alt="Tunershop Logo" className="w-lg h-lg mx-auto mb-6"/>
                 </Link>
