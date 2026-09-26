@@ -14,7 +14,7 @@ type DiscountForm = {
     company: string
 }
 
-const companies = ['Carstar', 'Jose Cafe']
+const companies = ['TireFire', 'Jose Cafe']
 
 const defaultForm: DiscountForm = {
     name: '',

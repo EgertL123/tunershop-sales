@@ -4,7 +4,7 @@ import {
     CirclePlus,
     Trash2,
     Gavel,
-    Wrench,
+    Flame,
     Coffee,
     Building2,
     User,
@@ -141,8 +141,8 @@ export default function Discounts() {
 
     const getCompanyIcon = (companyName: string) => {
         switch (companyName) {
-            case 'Carstar':
-                return <Wrench className="w-5 h-5 text-violet-300"/>
+            case 'TireFire':
+                return <Flame className="w-5 h-5 text-violet-300"/>
             case 'Jose Cafe':
                 return <Coffee className="w-5 h-5 text-violet-300"/>
             default:
