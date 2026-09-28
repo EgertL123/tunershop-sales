@@ -9,13 +9,20 @@ type Props = {
     userId: string | null
     userName: string | null
     onDelete: () => void
+    currentUserId: string | null
 }
 
-export default function DeleteUser({open, onClose, userId, onDelete}: Props) {
+export default function DeleteUser({open, onClose, userId, onDelete, currentUserId}: Props) {
     const [loading, setLoading] = useState(false)
+    const isSelfDelete = userId !== null && currentUserId !== null && userId === currentUserId
 
     const handleConfirmDelete = async () => {
         if (!userId) return
+        if (isSelfDelete) {
+            showError('Sa ei saa oma kontot kustutada.')
+            onClose()
+            return
+        }
 
         setLoading(true)
 
@@ -64,7 +71,7 @@ export default function DeleteUser({open, onClose, userId, onDelete}: Props) {
                     <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
                             <Trash2 className="w-6 h-6 text-red-400"/>
-                            Kustuta müük
+                            Kustuta kasutaja
                         </div>
                         <button onClick={onClose} className="text-zinc-400 hover:text-white transition cursor-pointer">
                             <X className="w-5 h-5"/>
@@ -74,7 +81,9 @@ export default function DeleteUser({open, onClose, userId, onDelete}: Props) {
                     {/* Confirmation Message */}
                     <div className="space-y-3">
                         <p className="text-zinc-300">
-                            Oled sa kindel, et soovid seda kasutajat kustutada?
+                            {isSelfDelete
+                                ? 'Sa ei saa oma kontot kustutada.'
+                                : 'Oled sa kindel, et soovid seda kasutajat kustutada?'}
                         </p>
                     </div>
 
@@ -90,14 +99,16 @@ export default function DeleteUser({open, onClose, userId, onDelete}: Props) {
                                 Tühista
                             </div>
                         </button>
-                        <button
-                            onClick={handleConfirmDelete}
-                            disabled={loading}
-                            className="px-4 py-2 text-sm font-semibold rounded-lg bg-red-600 hover:bg-red-700 text-white transition disabled:opacity-50 cursor-pointer flex items-center gap-1"
-                        >
-                            <Trash2 className="w-4 h-4"/>
-                            {loading ? 'Kustutamine...' : 'Kustuta'}
-                        </button>
+                        {!isSelfDelete && (
+                            <button
+                                onClick={handleConfirmDelete}
+                                disabled={loading}
+                                className="px-4 py-2 text-sm font-semibold rounded-lg bg-red-600 hover:bg-red-700 text-white transition disabled:opacity-50 cursor-pointer flex items-center gap-1"
+                            >
+                                <Trash2 className="w-4 h-4"/>
+                                {loading ? 'Kustutamine...' : 'Kustuta'}
+                            </button>
+                        )}
                     </div>
                 </div>
             </div>

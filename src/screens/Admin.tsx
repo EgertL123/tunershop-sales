@@ -32,6 +32,7 @@ export default function Admin() {
     const [users, setUsers] = useState<UserData[]>([])
     const [loading, setLoading] = useState(true)
     const [authorized, setAuthorized] = useState<boolean | null>(null)
+    const [currentUserId, setCurrentUserId] = useState<string | null>(null)
     const [editDialogOpen, setEditDialogOpen] = useState(false)
     const [deleteDialogOpen, setDeleteDialogOpen] = useState(false)
     const [selectedUser, setSelectedUser] = useState<UserData | null>(null)
@@ -43,6 +44,8 @@ export default function Admin() {
         const fetchCurrentUser = async () => {
             const {data: {user}} = await supabase.auth.getUser()
             if (user) {
+                setCurrentUserId(user.id)
+
                 const {data} = await supabase
                     .from('users')
                     .select('rank, is_admin')
@@ -127,6 +130,7 @@ export default function Admin() {
                 onDelete={() => {
                     setUsers((prev) => prev.filter((s) => s.id !== selectedUser?.id))
                 }}
+                currentUserId={currentUserId}
             />
 
             {loading ? (
@@ -212,8 +216,16 @@ export default function Admin() {
                                                     <Edit2 className="w-4 h-4"/>
                                                 </button>
                                                 <button
-                                                    onClick={() => handleDeleteClick(users)}
-                                                    className="inline-flex items-center p-1.5 rounded bg-red-600 hover:bg-red-700 text-white transition cursor-pointer"
+                                                    onClick={() => {
+                                                        if (users.id !== currentUserId) handleDeleteClick(users)
+                                                    }}
+                                                    disabled={users.id === currentUserId}
+                                                    title={users.id === currentUserId ? 'Sa ei saa oma kasutajat kustutada' : 'Kustuta kasutaja'}
+                                                    className={`inline-flex items-center p-1.5 rounded text-white transition ${
+                                                        users.id === currentUserId
+                                                            ? 'bg-red-600 text-zinc-400 cursor-not-allowed opacity-50'
+                                                            : 'bg-red-600 hover:bg-red-700 cursor-pointer'
+                                                    }`}
                                                 >
                                                     <Trash2 className="w-4 h-4"/>
                                                 </button>
